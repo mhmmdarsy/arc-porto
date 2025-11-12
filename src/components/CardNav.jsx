@@ -15,7 +15,6 @@ const CardNav = ({
   const cardsRef = useRef([]);
   const tlRef = useRef(null);
 
-  // === GSAP Animation ===
   const createTimeline = () => {
     const cards = cardsRef.current;
     gsap.set(cards, { y: 40, opacity: 0, filter: "blur(8px)" });
@@ -59,65 +58,60 @@ const CardNav = ({
   };
 
   return (
-    <div className="fixed top-10 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[900px]">
+    <div className="fixed top-10 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4">
       <div
         ref={navRef}
-        className="relative h-[64px] overflow-hidden rounded-2xl border border-white/20 shadow-2xl bg-white/10 backdrop-blur-xl transition-all duration-500"
+        className="relative h-[72px] overflow-hidden rounded-[1.75rem] border border-black/10 bg-white text-slate-900 shadow-[0_25px_45px_rgba(15,23,42,0.15)] transition-all duration-500"
       >
-        {/* === Top Nav Bar === */}
-        <div className="absolute inset-x-0 top-0 h-[64px] flex items-center justify-between px-5 z-10">
-          {/* Hamburger */}
+        <div className="absolute inset-x-0 top-0 h-[72px] flex items-center justify-between px-6 z-10">
           <button
             onClick={toggleMenu}
-            className="group flex flex-col gap-1.5 w-10 h-10 items-center justify-center text-white"
+            className="group flex flex-col gap-1.5 w-10 h-10 items-center justify-center text-current"
           >
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
-                isOpen ? "translate-y-[5px] rotate-45" : ""
+              className={`block w-7 h-0.5 rounded-full bg-current transition-all duration-300 ${
+                isOpen ? "translate-y-[6px] rotate-45" : ""
               }`}
             />
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${
-                isOpen ? "-translate-y-[5px] -rotate-45" : ""
+              className={`block w-7 h-0.5 rounded-full bg-current transition-all duration-300 ${
+                isOpen ? "-translate-y-[6px] -rotate-45" : ""
               }`}
             />
           </button>
 
-          {/* Logo */}
-          <div className="flex items-center gap-2 text-white">
-            <img src={logo} alt={logoAlt} className="h-7" />
-            <span className="font-semibold text-lg tracking-tight">
+          <div className="flex items-center gap-2">
+            <img src={logo} alt={logoAlt} className="h-7 w-7 object-contain" />
+            <span className="font-semibold text-lg tracking-tight text-slate-900">
               React Bits
             </span>
           </div>
 
-          {/* CTA */}
           <button
-            className="hidden md:inline-flex items-center px-5 py-2 text-sm font-medium rounded-lg transition-colors"
+            className="inline-flex items-center rounded-xl border border-black/10 bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-[inset_0_1px_rgba(255,255,255,0.4)] transition-colors hover:bg-black"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
           >
             Get Started
           </button>
         </div>
 
-        {/* === Expandable Cards === */}
-        <div className="flex flex-col md:flex-row gap-3 p-4 mt-[64px]">
+        <div className="flex flex-col gap-4 px-6 pb-6 pt-[88px] md:flex-row">
           {items.map((item, idx) => (
             <div
               key={idx}
               ref={setCardRef(idx)}
-              className="flex-1 rounded-xl p-4 text-white shadow-inner"
-              style={{ backgroundColor: item.bgColor }}
+              className="flex-1 min-h-[160px] rounded-2xl border border-white/10 p-5 text-white shadow-[inset_0_1px_rgba(255,255,255,0.1)]"
+              style={{ backgroundColor: item.bgColor, color: item.textColor }}
             >
-              <h3 className="text-lg font-semibold mb-2">{item.label}</h3>
-              <ul className="flex flex-col gap-1">
+              <h3 className="mb-3 text-lg font-semibold">{item.label}</h3>
+              <ul className="flex flex-col gap-1.5 text-sm">
                 {item.links.map((link, i) => (
                   <li key={i}>
                     <a
                       href={link.href}
-                      className="flex items-center gap-1 hover:opacity-80 transition-opacity"
+                      className="flex items-center gap-1 transition-opacity hover:opacity-80"
                     >
-                      <GoArrowUpRight className="text-white text-sm" />
+                      <GoArrowUpRight className="text-xs" />
                       <span>{link.label}</span>
                     </a>
                   </li>
