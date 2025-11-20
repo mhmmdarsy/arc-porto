@@ -1,9 +1,9 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import MenuToggle from "./CardNav/MenuToggle";
-import Brand from "./CardNav/Brand";
-import CTAButton from "./CardNav/CTAButton";
-import CardsGrid from "./CardNav/CardsGrid";
+import MenuToggle from "./MenuToggle";
+import Brand from "./Brand";
+import CTAButton from "./CTAButton";
+import CardsGrid from "./CardsGrid";
 
 const CardNav = ({
   // logo,
