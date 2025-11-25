@@ -25,7 +25,7 @@ export default function HomePage() {
   );
 
   const handleCountEnd = () => {
-    setIsFading(true); // start fading immediately at 100%
+    setIsFading(true);
   };
 
   return (
@@ -40,7 +40,7 @@ export default function HomePage() {
             <div className="text-xl font-bold tracking-tight text-slate-900">
               <CountUp
                 to={100}
-                duration={1}
+                duration={0.6}
                 className="inline"
                 onEnd={handleCountEnd}
               />

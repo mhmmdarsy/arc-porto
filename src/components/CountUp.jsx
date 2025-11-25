@@ -83,13 +83,18 @@ export default function CountUp({
 
   useEffect(() => {
     const unsubscribe = springValue.on("change", (latest) => {
+      const formattedTarget = formatValue(to);
+      const formattedLatest = formatValue(latest);
+
       if (ref.current) {
-        ref.current.textContent = formatValue(latest);
+        ref.current.textContent = formattedLatest;
       }
 
-      const reachedTarget = direction === "down" ? latest <= to : latest >= to;
+      const reachedTarget =
+        direction === "down" ? latest <= to : latest >= to;
+      const matchesDisplay = formattedLatest === formattedTarget;
 
-      if (!hasCompletedRef.current && reachedTarget) {
+      if (!hasCompletedRef.current && (reachedTarget || matchesDisplay)) {
         hasCompletedRef.current = true;
         if (ref.current) {
           ref.current.textContent = formatValue(to);
