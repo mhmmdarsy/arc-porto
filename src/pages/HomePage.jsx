@@ -1,11 +1,15 @@
 import { useState } from "react";
-import CardNav from "../components/CardNav";
 import Aurora from "../components/Aurora";
 import LoaderOverlay from "../components/LoaderOverlay";
+import StaggeredMenu from "../components/StaggeredMenu";
 import { navigationItems } from "../data/navigation";
 
 export default function HomePage() {
-  const items = navigationItems;
+  const menuItems = navigationItems.map((item) => ({
+    label: item.label,
+    link: item.links?.[0]?.href || "#",
+    ariaLabel: item.label,
+  }));
   const [showLoader, setShowLoader] = useState(true);
 
   return (
@@ -26,8 +30,20 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Navbar */}
-        <CardNav items={items} />
+        {/* Menu */}
+        <div className="w-full max-w-5xl px-4">
+          <StaggeredMenu
+            position="right"
+            items={menuItems}
+            displaySocials={true}
+            displayItemNumbering={true}
+            isFixed
+            colors={["#111", "#3A29FF"]}
+            menuButtonColor="#fff"
+            openMenuButtonColor="#111"
+            changeMenuColorOnOpen
+          />
+        </div>
       </div>
     </>
   );
