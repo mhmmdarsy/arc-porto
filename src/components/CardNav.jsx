@@ -9,11 +9,8 @@ const CardNav = ({
   // logo,
   // logoAlt = "Logo",
   brandText = "arc",
-  ctaLabel = "Get Started",
   items = [],
   ease = "power3.out",
-  buttonBgColor = "#111",
-  buttonTextColor = "#fff",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef(null);
@@ -118,24 +115,21 @@ const CardNav = ({
   };
 
   return (
-    <div className="fixed top-10 left-1/2 z-50 w-full max-w-5xl -translate-x-1/2 px-4">
-      <div
-        ref={navRef}
-        className="relative h-[72px] overflow-hidden rounded-[1.75rem] border border-black/10 bg-white text-slate-900 shadow-[0_25px_45px_rgba(15,23,42,0.15)] transition-all duration-500"
-      >
-        <div className="absolute inset-x-0 top-0 z-10 flex h-[72px] items-center justify-between px-6">
-          <MenuToggle isOpen={isOpen} onToggle={toggleMenu} />
-          <Brand brandText={brandText} />
-          <CTAButton
-            label={ctaLabel}
-            background={buttonBgColor}
-            color={buttonTextColor}
-          />
-        </div>
+    <>
+      <div className="fixed top-10 left-1/2 z-50 w-full max-w-5xl -translate-x-1/2 px-4">
+        <div
+          ref={navRef}
+          className="relative h-[72px] overflow-hidden rounded-[1.75rem] border border-black/10 bg-white text-slate-900 shadow-[0_25px_45px_rgba(15,23,42,0.15)] transition-all duration-500"
+        >
+          <div className="absolute inset-x-0 top-0 z-10 flex h-[72px] items-center justify-between px-6">
+            <MenuToggle isOpen={isOpen} onToggle={toggleMenu} />
+            <Brand brandText={brandText} />
+          </div>
 
-        <CardsGrid ref={cardsWrapperRef} items={items} setCardRef={setCardRef} />
+          <CardsGrid ref={cardsWrapperRef} items={items} setCardRef={setCardRef} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
