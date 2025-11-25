@@ -2,16 +2,9 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import MenuToggle from "./CardNav/MenuToggle";
 import Brand from "./CardNav/Brand";
-import CTAButton from "./CardNav/CTAButton";
 import CardsGrid from "./CardNav/CardsGrid";
 
-const CardNav = ({
-  // logo,
-  // logoAlt = "Logo",
-  brandText = "arc",
-  items = [],
-  ease = "power3.out",
-}) => {
+const CardNav = ({ brandText = "arc", items = [], ease = "power3.out" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef(null);
   const cardsWrapperRef = useRef(null);
