@@ -13,7 +13,7 @@ export const StaggeredMenu = ({
   menuButtonColor = '#fff',
   openMenuButtonColor = '#fff',
   changeMenuColorOnOpen = true,
-  isFixed = false,
+  isFixed = true,
   headerOffset,
   accentColor = '#5227FF',
   closeOnClickAway = true,
@@ -447,12 +447,12 @@ export const StaggeredMenu = ({
             <LocalTime
               label="samarinda, id"
               timeZone="Asia/Makassar"
-              className="sm-localtime text-[#e9e9ef] text-sm font-normal"
+              className="sm-localtime text-sm font-normal mix-blend-difference text-white"
               timeClassName="text-xs font-medium"
             />
             <button
               ref={toggleBtnRef}
-              className="sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-none cursor-pointer text-[#e9e9ef] text-base font-bold leading-none overflow-visible pointer-events-auto"
+              className="sm-toggle relative inline-flex items-center gap-[0.3rem] pb-1 bg-transparent border-none cursor-pointer text-base font-bold leading-none overflow-visible pointer-events-auto mix-blend-difference text-white"
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
               aria-controls="staggered-menu-panel"
@@ -583,6 +583,7 @@ export const StaggeredMenu = ({
 .sm-scope .sm-toggle-textInner { display: flex; flex-direction: column; line-height: 1; }
 .sm-scope .sm-toggle-line { display: block; height: 1em; line-height: 1; }
 .sm-scope .sm-icon { position: relative; width: 14px; height: 14px; flex: 0 0 14px; display: inline-flex; align-items: center; justify-content: center; will-change: transform; }
+.sm-scope .staggered-menu-header { color: #e9e9ef; }
 .sm-scope .sm-panel-itemWrap { position: relative; overflow: hidden; line-height: 1; }
 .sm-scope .sm-icon-line { position: absolute; left: 50%; top: 50%; width: 100%; height: 2px; background: currentColor; border-radius: 2px; transform: translate(-50%, -50%); will-change: transform; }
 .sm-scope .sm-line { display: none !important; }

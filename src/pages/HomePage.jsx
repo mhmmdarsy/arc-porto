@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Aurora from '../components/Aurora';
-import LoaderOverlay from '../components/LoaderOverlay';
-import StaggeredMenu from '../components/StaggeredMenu';
+import LoaderOverlay from '../components/loader/LoaderOverlay';
+import Header from '../components/layout/Header';
 import { navigationItems } from '../data/navigation';
 
 export default function HomePage() {
@@ -35,20 +35,7 @@ export default function HomePage() {
         </div> */}
 
         {/* Menu */}
-        <div className="w-full max-w-5xl px-4">
-          <StaggeredMenu
-            position="right"
-            items={menuItems}
-            displaySocials={true}
-            displayItemNumbering={true}
-            isFixed
-            headerOffset="-1rem"
-            colors={['#111', '#3A29FF']}
-            menuButtonColor="#fff"
-            openMenuButtonColor="#111"
-            changeMenuColorOnOpen
-          />
-        </div>
+        <Header menuItems={menuItems} />
       </div>
     </>
   );
