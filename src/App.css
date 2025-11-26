@@ -1,2 +1,7 @@
-/* App-level overrides intentionally left empty to avoid
-   conflicting with component-specific styles. */
+#smooth-wrapper {
+  overflow: hidden;
+}
+
+#smooth-content {
+  min-height: 100vh;
+}
