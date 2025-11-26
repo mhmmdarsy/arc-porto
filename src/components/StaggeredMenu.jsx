@@ -14,6 +14,7 @@ export const StaggeredMenu = ({
   openMenuButtonColor = '#fff',
   changeMenuColorOnOpen = true,
   isFixed = false,
+  headerOffset,
   accentColor = '#5227FF',
   closeOnClickAway = true,
   onMenuOpen,
@@ -432,6 +433,7 @@ export const StaggeredMenu = ({
 
         <header
           className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-end gap-10 p-[2em] bg-transparent pointer-events-none z-20"
+          style={{ top: headerOffset }}
           aria-label="Main navigation header"
         >
           <a

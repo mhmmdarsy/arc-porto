@@ -21,7 +21,7 @@ export default function HomePage() {
       />
 
       <div
-        className={`relative min-h-screen flex justify-center pt-28 overflow-hidden transition-[filter] duration-300 ${
+        className={`relative min-h-screen flex justify-center pt-0 overflow-hidden transition-[filter] duration-300 ${
           showLoader ? 'pointer-events-none blur-md' : 'blur-0'
         }`}
       >
@@ -42,6 +42,7 @@ export default function HomePage() {
             displaySocials={true}
             displayItemNumbering={true}
             isFixed
+            headerOffset="-1rem"
             colors={['#111', '#3A29FF']}
             menuButtonColor="#fff"
             openMenuButtonColor="#111"
