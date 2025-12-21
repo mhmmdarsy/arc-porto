@@ -1,40 +1,41 @@
-import { useLayoutEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import ScrollSmoother from 'gsap/ScrollSmoother';
 import './App.css';
-import HomePage from './pages/HomePage';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { Navigation } from './components/Navigation';
+import { HeroSection } from './components/HeroSection';
+import { AboutSection } from './components/AboutSection';
+import { ExperienceSection } from './components/ExperienceSection';
+import { SkillsSection } from './components/SkillsSection';
+import { ProjectsSection } from './components/ProjectsSection';
+import { ContactSection } from './components/ContactSection';
+import { Footer } from './components/Footer';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-
-function App() {
-  const smootherRef = useRef(null);
-
-  useLayoutEffect(() => {
-    if (smootherRef.current) return; // guard StrictMode double-invoke
-
-    smootherRef.current = ScrollSmoother.create({
-      smooth: 4,
-      effects: true,
-    });
-
-    return () => smootherRef.current?.kill();
-  }, []);
+function AppContent() {
+  const { isDark } = useTheme();
+  useSmoothScroll();
 
   return (
-    <div id="smooth-wrapper">
-      <div id="smooth-content">
-        <HomePage />
-        <div>
-          <section className="section footer text-cyan-50 py-36">
-            <div className="container">
-              <p>© 2024 Arc Porto. All rights reserved.</p>
-            </div>
-          </section>
-        </div>
-      </div>
+    <div
+      className={`min-h-screen transition-colors ${
+        isDark ? 'bg-black' : 'bg-white'
+      }`}
+    >
+      <Navigation />
+      <HeroSection />
+      <AboutSection />
+      <ExperienceSection />
+      <SkillsSection />
+      <ProjectsSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
