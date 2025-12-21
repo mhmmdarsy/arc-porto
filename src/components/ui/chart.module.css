@@ -1,0 +1,4 @@
+/* Add your chart-specific styles here. Example: */
+.chart-tooltip-indicator {
+  background-color: var(--color-indicator, #888);
+}
