@@ -53,7 +53,7 @@ export function AboutSection() {
                 <p className="text-xs uppercase tracking-widest opacity-40 mb-3">
                   Location
                 </p>
-                <p className="text-lg">Jakarta, Indonesia</p>
+                <p className="text-lg">Samarinda, Indonesia</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest opacity-40 mb-3">
