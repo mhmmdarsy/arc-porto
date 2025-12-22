@@ -8,7 +8,7 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 items-start">
           <HeroTitle />
         </div>
-        <div>
+        <div className="mt-12 max-w-3xl">
           <HeroDescription />
         </div>
       </div>
