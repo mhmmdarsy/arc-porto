@@ -1,13 +1,13 @@
 import './App.css';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
-import { Navigation } from './components/Navigation';
-import { HeroSection } from './components/HeroSection';
-import { AboutSection } from './components/AboutSection';
+import { Navigation } from './components/navigation/Navigation';
+import { HeroSection } from './components/sections/hero/HeroSection';
+import { AboutSection } from './components/sections/about/AboutSection';
 import { ExperienceSection } from './components/ExperienceSection';
-import { SkillsSection } from './components/SkillsSection';
-import { ProjectsSection } from './components/ProjectsSection';
+import { SkillsSection } from './components/sections/skills/SkillsSection';
+import { ProjectsSection } from './components/sections/projects/ProjectsSection';
 import { ContactSection } from './components/ContactSection';
-import { Footer } from './components/Footer';
+import { Footer } from './components/layout/Footer';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 
 function AppContent() {
