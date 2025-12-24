@@ -1,4 +1,3 @@
-// ...existing code from ProjectsGrid.tsx will be copied here...
 import { ProjectPreview } from './ProjectPreview';
 
 interface Project {

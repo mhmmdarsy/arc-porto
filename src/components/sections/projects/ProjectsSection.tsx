@@ -1,4 +1,3 @@
-// ...existing code from ProjectsSection.tsx will be copied here...
 import { useTheme } from "../../../contexts/ThemeContext";
 import { ProjectsGrid } from "./ProjectsGrid";
 

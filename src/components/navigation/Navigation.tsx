@@ -1,4 +1,3 @@
-// ...existing code from Navigation.tsx will be copied here...
 import { useState } from 'react';
 import { useCurrentTime } from '../../hooks/useCurrentTime';
 import { Navbar } from '../layout/Navbar';

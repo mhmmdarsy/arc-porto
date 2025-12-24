@@ -1,4 +1,3 @@
-// ...existing code from HeroDescription.tsx will be copied here...
 import { useTheme } from '../../../contexts/ThemeContext';
 
 export function HeroDescription() {

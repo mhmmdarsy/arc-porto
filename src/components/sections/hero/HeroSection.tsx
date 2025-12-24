@@ -1,4 +1,3 @@
-// ...existing code from HeroSection.tsx will be copied here...
 import { HeroTitle } from './HeroTitle';
 import { HeroDescription } from './HeroDescription';
 

@@ -1,4 +1,3 @@
-// ...existing code from SidebarMenu.tsx will be copied here...
 import { useTheme } from '../../contexts/ThemeContext';
 
 interface MenuItem {

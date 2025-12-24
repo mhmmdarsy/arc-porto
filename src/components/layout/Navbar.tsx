@@ -1,4 +1,3 @@
-// ...existing code from Navbar.tsx will be copied here...
 import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 
@@ -9,23 +8,30 @@ interface NavbarProps {
   onMenuToggle: () => void;
 }
 
-export function Navbar({ location, currentTime, isMenuOpen, onMenuToggle }: NavbarProps) {
+export function Navbar({
+  location,
+  currentTime,
+  isMenuOpen,
+  onMenuToggle,
+}: NavbarProps) {
   const { isDark, toggleTheme } = useTheme();
-  
+
   const getTextColor = () => {
     if (isMenuOpen) return 'text-black';
     return isDark ? 'text-white' : 'text-black';
   };
-  
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-colors ${isDark ? 'bg-black/30' : 'bg-white/30'}`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-colors ${
+        isDark ? 'bg-black/30' : 'bg-white/30'
+      }`}
+    >
       <div className="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between bg-[rgba(255,255,255,0)]">
         <div className="flex items-center">
-          <span className={`transition-colors ${getTextColor()}`}>
-            arc
-          </span>
+          <span className={`transition-colors ${getTextColor()}`}>arc</span>
         </div>
-        
+
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
             <button
@@ -39,7 +45,7 @@ export function Navbar({ location, currentTime, isMenuOpen, onMenuToggle }: Navb
               {location} {currentTime}
             </span>
           </div>
-          <button 
+          <button
             onClick={onMenuToggle}
             className={`hover:opacity-70 transition-all flex items-center gap-2 ${getTextColor()}`}
           >

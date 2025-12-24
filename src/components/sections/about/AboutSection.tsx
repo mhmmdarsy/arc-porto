@@ -1,4 +1,3 @@
-// ...existing code from AboutSection.tsx will be copied here...
 import { useTheme } from "../../../contexts/ThemeContext";
 
 export function AboutSection() {

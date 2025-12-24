@@ -1,4 +1,3 @@
-// ...existing code from ProjectPreview.tsx will be copied here...
 import { useTheme } from '../../../contexts/ThemeContext';
 
 interface ProjectPreviewProps {
