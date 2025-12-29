@@ -1,4 +1,4 @@
-import { useTheme } from "../../../contexts/ThemeContext";
+import { useTheme } from '../../../contexts/ThemeContext';
 
 interface SkillCategory {
   category: string;
@@ -7,37 +7,25 @@ interface SkillCategory {
 
 const skillCategories: SkillCategory[] = [
   {
-    category: "Frontend",
-    skills: [
-      "React",
-      "TypeScript",
-      "Next.js",
-      "Tailwind CSS",
-      "Vue.js",
-    ],
+    category: 'Frontend',
+    skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Vue.js'],
   },
   {
-    category: "Backend",
-    skills: [
-      "Node.js",
-      "Express",
-      "PostgreSQL",
-      "MongoDB",
-      "REST API",
-    ],
+    category: 'Backend',
+    skills: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'REST API'],
   },
   {
-    category: "Tools",
-    skills: ["Git", "Figma", "VS Code", "Docker", "Webpack"],
+    category: 'Tools',
+    skills: ['Git', 'Figma', 'VS Code', 'Docker', 'Webpack'],
   },
   {
-    category: "Design",
+    category: 'Design',
     skills: [
-      "UI/UX",
-      "Responsive Design",
-      "Typography",
-      "Animation",
-      "Prototyping",
+      'UI/UX',
+      'Responsive Design',
+      'Typography',
+      'Animation',
+      'Prototyping',
     ],
   },
 ];
@@ -49,7 +37,7 @@ export function SkillsSection() {
     <section
       id="skills"
       className={`py-32 transition-colors ${
-        isDark ? "bg-black text-white" : "bg-white text-black"
+        isDark ? 'bg-black text-white' : 'bg-white text-black'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -75,7 +63,7 @@ export function SkillsSection() {
             <div
               key={index}
               className={`border-l-2 pl-8 transition-colors ${
-                isDark ? "border-white/20" : "border-black/20"
+                isDark ? 'border-white/20' : 'border-black/20'
               }`}
             >
               <h3 className="text-xs uppercase tracking-widest opacity-40 mb-6">
@@ -103,41 +91,41 @@ export function SkillsSection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div
               className={`border p-8 transition-colors ${
-                isDark ? "border-white/20" : "border-black/20"
+                isDark ? 'border-white/20' : 'border-black/20'
               }`}
             >
               <h4 className="text-2xl uppercase tracking-tight mb-4">
                 Web Development
               </h4>
               <p className="opacity-60 leading-relaxed">
-                Full-stack web applications with modern
-                frameworks and best practices.
+                Full-stack web applications with modern frameworks and best
+                practices.
               </p>
             </div>
             <div
               className={`border p-8 transition-colors ${
-                isDark ? "border-white/20" : "border-black/20"
+                isDark ? 'border-white/20' : 'border-black/20'
               }`}
             >
               <h4 className="text-2xl uppercase tracking-tight mb-4">
                 UI/UX Design
               </h4>
               <p className="opacity-60 leading-relaxed">
-                User-centered design solutions that balance
-                aesthetics and functionality.
+                User-centered design solutions that balance aesthetics and
+                functionality.
               </p>
             </div>
             <div
               className={`border p-8 transition-colors ${
-                isDark ? "border-white/20" : "border-black/20"
+                isDark ? 'border-white/20' : 'border-black/20'
               }`}
             >
               <h4 className="text-2xl uppercase tracking-tight mb-4">
                 Consulting
               </h4>
               <p className="opacity-60 leading-relaxed">
-                Technical guidance and code reviews for web
-                development projects.
+                Technical guidance and code reviews for web development
+                projects.
               </p>
             </div>
           </div>
