@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Aurora from '../components/Aurora';
 import LoaderOverlay from '../components/loader/LoaderOverlay';
 
 export default function HomePage() {
@@ -17,8 +16,7 @@ export default function HomePage() {
         className={`relative min-h-screen flex justify-center pt-0 overflow-hidden transition-[filter] duration-300 ${
           showLoader ? 'pointer-events-none blur-md' : 'blur-0'
         }`}
-      >
-      </div>
+      ></div>
     </>
   );
 }
