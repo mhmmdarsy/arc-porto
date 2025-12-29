@@ -1,4 +1,4 @@
-import { useTheme } from "../../../contexts/ThemeContext";
+import { useTheme } from '../../../contexts/ThemeContext';
 
 export function AboutSection() {
   const { isDark } = useTheme();
@@ -7,7 +7,7 @@ export function AboutSection() {
     <section
       id="about"
       className={`py-32 transition-colors ${
-        isDark ? "bg-black text-white" : "bg-white text-black"
+        isDark ? 'bg-black text-white' : 'bg-white text-black'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -34,16 +34,14 @@ export function AboutSection() {
             {/* Bio */}
             <div className="max-w-2xl">
               <p className="text-lg md:text-xl leading-relaxed opacity-80 mb-6">
-                I'm a web developer passionate about creating
-                beautiful, functional, and user-centered digital
-                experiences.
+                I'm a web developer passionate about creating beautiful,
+                functional, and user-centered digital experiences.
               </p>
               <p className="leading-relaxed opacity-60">
-                With a focus on modern web technologies and
-                clean code, I build applications that not only
-                look great but perform exceptionally. I believe
-                in the power of minimalist design combined with
-                robust functionality.
+                With a focus on modern web technologies and clean code, I build
+                applications that not only look great but perform exceptionally.
+                I believe in the power of minimalist design combined with robust
+                functionality.
               </p>
             </div>
 
