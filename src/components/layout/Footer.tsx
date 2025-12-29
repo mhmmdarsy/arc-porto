@@ -1,26 +1,29 @@
-import { useTheme } from "../../contexts/ThemeContext";
+import { useTheme } from '../../contexts/ThemeContext';
 
 export function Footer() {
   const { isDark } = useTheme();
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={`border-t transition-colors ${
-      isDark ? 'border-white/20 bg-black text-white' : 'border-black/20 bg-white text-black'
-    }`}>
+    <footer
+      className={`border-t transition-colors ${
+        isDark
+          ? 'border-white/20 bg-black text-white'
+          : 'border-black/20 bg-white text-black'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6 py-20">
         {/* Main Grid - Spacious */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-20">
           {/* Brand Section */}
           <div className="md:col-span-5">
-            <h2 className="text-5xl mb-6 uppercase tracking-tight">
-              ARC
-            </h2>
+            <h2 className="text-5xl mb-6 uppercase tracking-tight">ARC</h2>
             <p className="text-sm uppercase tracking-widest mb-8 opacity-60">
               Web Developer
             </p>
             <p className="max-w-xs opacity-70 leading-relaxed">
-              Crafting digital experiences with clean code and thoughtful design.
+              Crafting digital experiences with clean code and thoughtful
+              design.
             </p>
           </div>
 
@@ -116,9 +119,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Info */}
-        <div className={`pt-12 border-t transition-colors ${
-          isDark ? 'border-white/10' : 'border-black/10'
-        }`}>
+        <div
+          className={`pt-12 border-t transition-colors ${
+            isDark ? 'border-white/10' : 'border-black/10'
+          }`}
+        >
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <p className="text-xs uppercase tracking-widest opacity-40">
               © {currentYear} Arc Portfolio
