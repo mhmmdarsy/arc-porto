@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 
 interface ThemeContextType {
   isDark: boolean;
@@ -24,10 +30,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggleTheme = () => {
-    setIsDark(prev => {
+    setIsDark((prev) => {
       const newTheme = !prev;
       localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-      
+
       // Update class on document for CSS selection styling
       if (newTheme) {
         document.documentElement.classList.remove('light-mode');
@@ -36,7 +42,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         document.documentElement.classList.remove('dark-mode');
         document.documentElement.classList.add('light-mode');
       }
-      
+
       return newTheme;
     });
   };
