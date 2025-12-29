@@ -1,4 +1,4 @@
-import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
+import { HiOutlineBars3, HiOutlineXMark } from 'react-icons/hi2';
 
 const MenuToggle = ({ isOpen, onToggle }) => (
   <button
