@@ -14,24 +14,21 @@ export function Navigation() {
 
   return (
     <>
-      <Navbar 
+      <Navbar
         location={location}
         currentTime={currentTime}
         isMenuOpen={isMenuOpen}
         onMenuToggle={handleMenuToggle}
       />
-      
+
       <SidebarMenu
         location={location}
         currentTime={currentTime}
         isOpen={isMenuOpen}
         onClose={handleMenuClose}
       />
-      
-      <MenuOverlay 
-        isVisible={isMenuOpen}
-        onClick={handleMenuClose}
-      />
+
+      <MenuOverlay isVisible={isMenuOpen} onClick={handleMenuClose} />
     </>
   );
 }
