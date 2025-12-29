@@ -1,5 +1,5 @@
-import { forwardRef } from "react";
-import { GoArrowUpRight } from "react-icons/go";
+import { forwardRef } from 'react';
+import { GoArrowUpRight } from 'react-icons/go';
 
 const NavCard = forwardRef(({ label, bgColor, textColor, links }, ref) => (
   <div
