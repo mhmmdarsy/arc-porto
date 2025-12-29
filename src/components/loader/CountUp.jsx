@@ -66,9 +66,7 @@ export default function CountUp({
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.textContent = formatValue(
-        direction === 'down' ? to : from,
-      );
+      ref.current.textContent = formatValue(direction === 'down' ? to : from);
     }
   }, [from, to, direction, formatValue]);
 
