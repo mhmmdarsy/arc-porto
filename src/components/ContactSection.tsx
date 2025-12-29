@@ -1,4 +1,4 @@
-import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from '../contexts/ThemeContext';
 
 export function ContactSection() {
   const { isDark } = useTheme();
@@ -7,7 +7,7 @@ export function ContactSection() {
     <section
       id="contact"
       className={`py-32 transition-colors ${
-        isDark ? "bg-black text-white" : "bg-white text-black"
+        isDark ? 'bg-black text-white' : 'bg-white text-black'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -28,9 +28,8 @@ export function ContactSection() {
             Together
           </h2>
           <p className="text-lg md:text-xl max-w-2xl opacity-70 leading-relaxed">
-            Have a project in mind or want to collaborate? I'm
-            always open to discussing new opportunities and
-            creative ideas.
+            Have a project in mind or want to collaborate? I'm always open to
+            discussing new opportunities and creative ideas.
           </p>
         </div>
 
@@ -39,7 +38,7 @@ export function ContactSection() {
           {/* Email */}
           <div
             className={`border-t-2 pt-8 transition-colors ${
-              isDark ? "border-white/20" : "border-black/20"
+              isDark ? 'border-white/20' : 'border-black/20'
             }`}
           >
             <p className="text-xs uppercase tracking-widest opacity-40 mb-4">
@@ -56,7 +55,7 @@ export function ContactSection() {
           {/* Social */}
           <div
             className={`border-t-2 pt-8 transition-colors ${
-              isDark ? "border-white/20" : "border-black/20"
+              isDark ? 'border-white/20' : 'border-black/20'
             }`}
           >
             <p className="text-xs uppercase tracking-widest opacity-40 mb-4">
@@ -97,8 +96,8 @@ export function ContactSection() {
             href="mailto:hello@arc.dev"
             className={`inline-block border-4 px-12 py-6 text-xl uppercase tracking-wide transition-all hover:scale-105 ${
               isDark
-                ? "border-white text-white hover:bg-white hover:text-black"
-                : "border-black text-black hover:bg-black hover:text-white"
+                ? 'border-white text-white hover:bg-white hover:text-black'
+                : 'border-black text-black hover:bg-black hover:text-white'
             }`}
           >
             Get In Touch
