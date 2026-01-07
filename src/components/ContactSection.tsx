@@ -48,7 +48,7 @@ export function ContactSection() {
               href="mailto:hello@arc.dev"
               className="text-2xl md:text-3xl uppercase tracking-tight hover:opacity-60 transition-opacity inline-block"
             >
-              hello@arc.dev
+              muhammadarsyalfahd@gmail.com
             </a>
           </div>
 
@@ -63,7 +63,7 @@ export function ContactSection() {
             </p>
             <div className="space-y-3">
               <a
-                href="https://github.com"
+                href="https://github.com/mhmmdarsy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xl uppercase tracking-tight hover:opacity-60 transition-opacity block"
@@ -71,7 +71,7 @@ export function ContactSection() {
                 GitHub
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/mhmdarsy/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xl uppercase tracking-tight hover:opacity-60 transition-opacity block"
@@ -93,7 +93,7 @@ export function ContactSection() {
         {/* CTA Button */}
         <div className="text-center pt-12">
           <a
-            href="mailto:hello@arc.dev"
+            href="mailto:muhammadarsyalfahd@gmail.com"
             className={`inline-block border-4 px-12 py-6 text-xl uppercase tracking-wide transition-all hover:scale-105 ${
               isDark
                 ? 'border-white text-white hover:bg-white hover:text-black'
