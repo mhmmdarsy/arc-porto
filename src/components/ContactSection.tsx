@@ -100,7 +100,7 @@ export function ContactSection() {
                 : 'border-black text-black hover:bg-black hover:text-white'
             }`}
           >
-            Get In Touch
+            Reach Out
           </a>
         </div>
 
@@ -110,7 +110,7 @@ export function ContactSection() {
             Currently available for freelance projects
           </p>
           <p className="text-xs uppercase tracking-widest opacity-30">
-            Response time: 24-48 hours
+            Response time: 1-2 hours
           </p>
         </div>
       </div>
