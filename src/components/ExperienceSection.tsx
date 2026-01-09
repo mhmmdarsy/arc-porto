@@ -10,14 +10,14 @@ interface Experience {
 const experiences: Experience[] = [
   {
     year: 'Aug 2025 — Dec 2025',
-    title: 'React and Backend With AI - Independent Study',
-    company: 'Dicoding x Accenture',
+    title: 'Independent Study',
+    company: 'Accenture & Dicoding',
     description:
-      'Built and deployed a Sales Portal web application using React.js and Tailwind CSS. Integrated frontend with REST APIs (Express.js) and Supabase for data handling, and handled client-side deployment using Vercel.',
+      'Selected as a participant in the Asah Independent Study Cohort by Accenture and Dicoding, completing the React & Backend with AI learning path.\n\nBuilt and deployed a Sales Portal web application using React.js and Tailwind CSS. Integrated RESTful APIs with Express.js and Supabase for data management. Handled client-side deployment using Vercel.',
   },
   {
     year: 'Sep 2025 — Nov 2025',
-    title: 'Laboratory Assistant (Programming)',
+    title: 'Laboratory Assistant',
     company: 'Mulawarman University',
     description:
       'Assisted and mentored students in object-oriented programming concepts, provided debugging support for coding assignments, and supported the execution of practical programming sessions.',
@@ -45,9 +45,7 @@ export function ExperienceSection() {
         {/* Title */}
         <div className="mb-20">
           <h2 className="text-6xl md:text-7xl lg:text-8xl uppercase tracking-tighter leading-[0.9]">
-            Work
-            <br />
-            History
+            Experience
           </h2>
         </div>
 
@@ -79,7 +77,9 @@ export function ExperienceSection() {
 
               {/* Description */}
               <div className="md:col-span-5">
-                <p className="leading-relaxed opacity-70">{exp.description}</p>
+                <p className="leading-relaxed opacity-70 whitespace-pre-line">
+                  {exp.description}
+                </p>
               </div>
             </div>
           ))}
