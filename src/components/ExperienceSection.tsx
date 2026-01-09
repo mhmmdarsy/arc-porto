@@ -9,32 +9,18 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    year: '2023 — Now',
-    title: 'Senior Frontend Developer',
-    company: 'Tech Startup Inc.',
+    year: 'Aug 2025 — Dec 2025',
+    title: 'React and Backend With AI - Independent Study',
+    company: 'Dicoding x Accenture',
     description:
-      'Leading frontend architecture and design system implementation for enterprise applications.',
+      'Built and deployed a Sales Portal web application using React.js and Tailwind CSS. Integrated frontend with REST APIs (Express.js) and Supabase for data handling, and handled client-side deployment using Vercel.',
   },
   {
-    year: '2021 — 2023',
-    title: 'Full Stack Developer',
-    company: 'Digital Agency',
+    year: 'Sep 2025 — Nov 2025',
+    title: 'Laboratory Assistant (Programming)',
+    company: 'Mulawarman University',
     description:
-      'Developed and maintained multiple client projects using React, Node.js, and modern web technologies.',
-  },
-  {
-    year: '2019 — 2021',
-    title: 'Frontend Developer',
-    company: 'Creative Studio',
-    description:
-      'Built responsive websites and web applications with focus on performance and user experience.',
-  },
-  {
-    year: '2018 — 2019',
-    title: 'Junior Developer',
-    company: 'Startup Company',
-    description:
-      'Started career building web interfaces and learning modern JavaScript frameworks.',
+      'Assisted and mentored students in object-oriented programming concepts, provided debugging support for coding assignments, and supported the execution of practical programming sessions.',
   },
 ];
 
