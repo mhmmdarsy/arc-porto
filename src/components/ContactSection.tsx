@@ -29,7 +29,7 @@ export function ContactSection() {
           </h2>
           <p className="text-lg md:text-xl max-w-2xl opacity-70 leading-relaxed">
             Have a project in mind or want to collaborate? I'm always open to
-            discussing new opportunities and creative ideas.
+            discussing new opportunities. Let's get in touch!
           </p>
         </div>
 
