@@ -20,7 +20,7 @@ const experiences: Experience[] = [
     title: 'Laboratory Assistant',
     company: 'Mulawarman University',
     description:
-      'Assisted and mentored students in object-oriented programming concepts, provided debugging support for coding assignments, and supported the execution of practical programming sessions.',
+      'Assisted and mentored students in object-oriented programming (OOP) using Java, focusing on core concepts such as classes, inheritance, and encapsulation, while providing debugging support for student assignments and practical sessions.',
   },
 ];
 
