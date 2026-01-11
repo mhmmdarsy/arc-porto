@@ -78,14 +78,6 @@ export function ContactSection() {
               >
                 LinkedIn
               </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xl uppercase tracking-tight hover:opacity-60 transition-opacity block"
-              >
-                Twitter
-              </a>
             </div>
           </div>
         </div>
