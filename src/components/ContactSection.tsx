@@ -92,7 +92,7 @@ export function ContactSection() {
                 : 'border-black text-black hover:bg-black hover:text-white'
             }`}
           >
-            Reach Out
+            Reach Me Out
           </a>
         </div>
 
