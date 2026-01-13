@@ -63,7 +63,7 @@ export function AboutSection() {
                 <p className="text-xs uppercase tracking-widest opacity-40 mb-3">
                   Specialization
                 </p>
-                <p className="text-lg">Frontend & UI/UX</p>
+                <p className="text-lg">Frontend Developer & UI/UX</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest opacity-40 mb-3">
