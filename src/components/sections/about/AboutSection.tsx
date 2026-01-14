@@ -38,10 +38,8 @@ export function AboutSection() {
                 functional, and user-centered digital experiences.
               </p>
               <p className="leading-relaxed opacity-60">
-                With a focus on modern web technologies and clean code, I build
-                applications that not only look great but perform exceptionally.
-                I believe in the power of minimalist design combined with robust
-                functionality.
+                I build clean, high-performance web applications using modern
+                technologies.
               </p>
             </div>
 
