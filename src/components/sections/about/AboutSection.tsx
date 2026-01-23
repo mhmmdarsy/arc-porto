@@ -25,7 +25,7 @@ export function AboutSection() {
             <h2 className="text-6xl md:text-7xl lg:text-8xl uppercase tracking-tighter leading-[0.9]">
               Creative
               <br />
-              Developer
+              Front-end Developer
             </h2>
           </div>
 
