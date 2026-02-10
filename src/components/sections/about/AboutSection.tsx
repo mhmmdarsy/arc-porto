@@ -33,18 +33,14 @@ export function AboutSection() {
           <div className="lg:col-span-7 space-y-12">
             {/* Bio */}
             <div className="max-w-2xl">
-              <p className="text-lg md:text-xl leading-relaxed opacity-80 mb-6">
+              <p className="text-lg md:text-xl leading-relaxed opacity-80">
                 I'm a web developer passionate about creating beautiful,
                 functional, and user-centered digital experiences.
-              </p>
-              <p className="leading-relaxed opacity-60">
-                I build clean, high-performance web applications using modern
-                technologies.
               </p>
             </div>
 
             {/* Quick Facts */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <p className="text-xs uppercase tracking-widest opacity-40 mb-3">
                   Location
@@ -55,13 +51,13 @@ export function AboutSection() {
                 <p className="text-xs uppercase tracking-widest opacity-40 mb-3">
                   Experience
                 </p>
-                <p className="text-lg">5+ Years</p>
+                <p className="text-lg">1+ Years</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest opacity-40 mb-3">
                   Role
                 </p>
-                <p className="text-lg">Frontend Developer & UI/UX</p>
+                <p className="text-lg">Frontend Dev & UI/UX Designer</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest opacity-40 mb-3">
