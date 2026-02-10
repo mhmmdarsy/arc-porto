@@ -6,9 +6,8 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className={`py-32 transition-colors ${
-        isDark ? 'bg-black text-white' : 'bg-white text-black'
-      }`}
+      className={`py-32 transition-colors ${isDark ? 'bg-black text-white' : 'bg-white text-black'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Number */}
