@@ -1,6 +1,15 @@
 import { useEffect, useState } from 'react';
 import CountUp from './CountUp';
 
+interface LoaderOverlayProps {
+  show: boolean;
+  onHidden?: () => void;
+  duration?: number;
+  fadeDuration?: number;
+  backgroundClass?: string;
+  textClass?: string;
+}
+
 const LoaderOverlay = ({
   show,
   onHidden,
@@ -8,7 +17,7 @@ const LoaderOverlay = ({
   fadeDuration = 350,
   backgroundClass = 'bg-white',
   textClass = 'text-slate-900',
-}) => {
+}: LoaderOverlayProps) => {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
@@ -18,7 +27,7 @@ const LoaderOverlay = ({
   useEffect(() => {
     if (!isFading) return;
     const timer = setTimeout(() => {
-      if (typeof onHidden === 'function') onHidden();
+      onHidden?.();
     }, fadeDuration);
     return () => clearTimeout(timer);
   }, [isFading, fadeDuration, onHidden]);
