@@ -1,4 +1,6 @@
-export const navigationItems = [
+import type { NavigationCardItem } from '../types/navigation';
+
+export const navigationItems: NavigationCardItem[] = [
   {
     label: 'About',
     bgColor: '#0D0716',
