@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react';
 
+interface LocalTimeProps {
+  label?: string;
+  timeZone?: string;
+  className?: string;
+  timeClassName?: string;
+}
+
 const LocalTime = ({
   label = 'samarinda, id',
   timeZone = 'Asia/Makassar',
   className = '',
   timeClassName = '',
-}) => {
+}: LocalTimeProps) => {
   const [localTime, setLocalTime] = useState('');
 
   useEffect(() => {
@@ -18,8 +25,10 @@ const LocalTime = ({
 
     const updateTime = () =>
       setLocalTime(formatter.format(new Date()).toLowerCase());
+
     updateTime();
     const id = setInterval(updateTime, 30 * 1000);
+
     return () => clearInterval(id);
   }, [timeZone]);
 
