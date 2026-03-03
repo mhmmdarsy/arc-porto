@@ -1,6 +1,21 @@
 import { useInView, useMotionValue, useSpring } from 'motion/react';
 import { useCallback, useEffect, useRef } from 'react';
 
+type CountDirection = 'up' | 'down';
+
+interface CountUpProps {
+  to: number;
+  from?: number;
+  direction?: CountDirection;
+  delay?: number;
+  duration?: number;
+  className?: string;
+  startWhen?: boolean;
+  separator?: string;
+  onStart?: () => void;
+  onEnd?: () => void;
+}
+
 export default function CountUp({
   to,
   from = 0,
@@ -12,8 +27,8 @@ export default function CountUp({
   separator = '',
   onStart,
   onEnd,
-}) {
-  const ref = useRef(null);
+}: CountUpProps) {
+  const ref = useRef<HTMLSpanElement | null>(null);
   const motionValue = useMotionValue(direction === 'down' ? to : from);
   const hasCompletedRef = useRef(false);
 
@@ -27,13 +42,13 @@ export default function CountUp({
 
   const isInView = useInView(ref, { once: true, margin: '0px' });
 
-  const getDecimalPlaces = (num) => {
+  const getDecimalPlaces = (num: number) => {
     const str = num.toString();
 
     if (str.includes('.')) {
       const decimals = str.split('.')[1];
 
-      if (parseInt(decimals) !== 0) {
+      if (Number.parseInt(decimals, 10) !== 0) {
         return decimals.length;
       }
     }
@@ -44,11 +59,11 @@ export default function CountUp({
   const maxDecimals = Math.max(getDecimalPlaces(from), getDecimalPlaces(to));
 
   const formatValue = useCallback(
-    (latest) => {
+    (latest: number) => {
       const hasDecimals = maxDecimals > 0;
 
-      const options = {
-        useGrouping: !!separator,
+      const options: Intl.NumberFormatOptions = {
+        useGrouping: Boolean(separator),
         minimumFractionDigits: hasDecimals ? maxDecimals : 0,
         maximumFractionDigits: hasDecimals ? maxDecimals : 0,
       };
@@ -73,7 +88,7 @@ export default function CountUp({
   useEffect(() => {
     if (isInView && startWhen) {
       hasCompletedRef.current = false;
-      if (typeof onStart === 'function') onStart();
+      onStart?.();
 
       const timeoutId = setTimeout(() => {
         motionValue.set(direction === 'down' ? from : to);
@@ -102,7 +117,7 @@ export default function CountUp({
         if (ref.current) {
           ref.current.textContent = formatValue(to);
         }
-        if (typeof onEnd === 'function') onEnd();
+        onEnd?.();
       }
     });
 
