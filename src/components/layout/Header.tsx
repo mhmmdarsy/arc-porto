@@ -1,11 +1,21 @@
 import StaggeredMenu from '../StaggeredMenu';
+import type {
+  NavigationCardItem,
+  StaggeredMenuItem,
+} from '../../types/navigation';
+
+interface HeaderProps {
+  menuItems?: NavigationCardItem[];
+  accentColor?: string;
+  headerOffset?: string;
+}
 
 export default function Header({
   menuItems = [],
   accentColor = '#5227FF',
   headerOffset = '-1rem',
-}) {
-  const items = menuItems.map((item) => ({
+}: HeaderProps) {
+  const items: StaggeredMenuItem[] = menuItems.map((item) => ({
     label: item.label,
     link: item.links?.[0]?.href || '#',
     ariaLabel: item.label,
