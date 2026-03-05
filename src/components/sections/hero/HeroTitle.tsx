@@ -7,12 +7,16 @@ export function HeroTitle() {
     <div className="lg:col-span-8">
       <div className="relative">
         <h1
-          className={`text-[16rem] leading-none tracking-tighter transition-colors ${
+          className={`grid grid-cols-12 text-[clamp(3.5rem,13vw,11rem)] leading-[0.82] tracking-tight transition-colors ${
             isDark ? 'text-white' : 'text-black'
           }`}
-          style={{ fontWeight: 900, wordSpacing: '-1.5em', lineHeight: '0.8' }}
+          style={{ fontWeight: 900 }}
         >
-          WEB DEVELOPER
+          <span className="col-span-12 whitespace-nowrap">CREATIVE</span>
+          <span className="col-span-6 sm:col-span-5 whitespace-nowrap">
+            WEB
+          </span>
+          <span className="col-span-12 whitespace-nowrap">DEVELOPER</span>
         </h1>
       </div>
     </div>
