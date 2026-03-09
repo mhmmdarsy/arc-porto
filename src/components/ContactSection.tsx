@@ -99,7 +99,7 @@ export function ContactSection() {
         {/* Additional Info */}
         <div className="mt-20 text-center">
           <p className="text-sm opacity-40 mb-2">
-            Currently available for freelance projects
+            Available for freelance projects
           </p>
           <p className="text-xs uppercase tracking-widest opacity-30">
             Response time: 1-2 hours
