@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.astro/
+
+# Agent / AI tooling (local only)
+.agents/
+.claude/
+.codebuddy/
+skills-lock.json
