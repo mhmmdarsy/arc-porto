@@ -1,0 +1,94 @@
+---
+import SectionHeader from '../SectionHeader.astro';
+
+const skillCategories = [
+  {
+    category: 'Frontend',
+    skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Vue.js'],
+  },
+  {
+    category: 'Backend',
+    skills: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'REST API'],
+  },
+  {
+    category: 'Tools',
+    skills: ['Git', 'Figma', 'VS Code', 'Docker', 'Webpack'],
+  },
+  {
+    category: 'Design',
+    skills: [
+      'UI/UX',
+      'Responsive Design',
+      'Typography',
+      'Animation',
+      'Prototyping',
+    ],
+  },
+];
+
+const services = [
+  {
+    title: 'Web Development',
+    body: 'Full-stack web applications with modern frameworks and best practices.',
+  },
+  {
+    title: 'UI/UX Design',
+    body: 'User-centered design solutions that balance aesthetics and functionality.',
+  },
+  {
+    title: 'Consulting',
+    body: 'Technical guidance and code reviews for web development projects.',
+  },
+];
+---
+
+<section id="skills" class="scroll-mt-20 bg-canvas py-28 md:py-36">
+  <div class="mx-auto max-w-7xl px-6 md:px-10">
+    <SectionHeader number="03" label="Skills" />
+
+    <h2
+      class="mb-16 text-5xl font-black uppercase leading-[0.92] tracking-tighter md:mb-20 md:text-7xl lg:text-8xl"
+    >
+      Tech<br />Stack
+    </h2>
+
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-16">
+      {
+        skillCategories.map((category) => (
+          <div class="border-l-2 border-line pl-7">
+            <h3 class="mb-6 font-mono text-[10px] uppercase tracking-[0.22em] text-ink/40">
+              {category.category}
+            </h3>
+            <ul class="space-y-3">
+              {category.skills.map((skill) => (
+                <li class="text-xl uppercase tracking-tight text-ink/80 transition-opacity hover:opacity-100 md:text-2xl">
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-24 md:mt-32">
+      <h3
+        class="mb-10 font-mono text-[10px] uppercase tracking-[0.22em] text-ink/40"
+      >
+        What I Offer
+      </h3>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {
+          services.map((service) => (
+            <div class="border border-line p-8 transition-colors hover:border-ink/30">
+              <h4 class="mb-4 text-2xl uppercase tracking-tight">
+                {service.title}
+              </h4>
+              <p class="leading-relaxed text-ink/65">{service.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
