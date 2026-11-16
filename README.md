@@ -1,4 +1,4 @@
-# arc-porto
+# portfolio
 
 Independent portfolio site rebuilt with [Astro](https://astro.build) + Tailwind CSS 4.
 
