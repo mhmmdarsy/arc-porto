@@ -34,20 +34,3 @@
     color: #3b82f6;
   }
 }
-
-@utility dot-grid {
-  background-image: radial-gradient(
-    circle,
-    rgba(10, 10, 10, 0.13) 1px,
-    transparent 1px
-  );
-  background-size: 28px 28px;
-}
-
-@utility pill-solid {
-  @apply inline-flex cursor-pointer items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-canvas transition-transform duration-300 hover:scale-[1.04];
-}
-
-@utility pill-ghost {
-  @apply inline-flex cursor-pointer items-center gap-2 rounded-full border border-line bg-transparent px-6 py-3 text-sm font-medium text-ink transition-colors duration-300 hover:bg-ink/[0.05];
-}
