@@ -11,9 +11,9 @@ const initialWitaTime = new Intl.DateTimeFormat('en-GB', {
   .replace(/:/g, ' : ');
 ---
 
-<footer class="pt-10 pb-16 w-full" aria-label="Site Footer">
+<footer class="pt-8 sm:pt-10 pb-[max(2.5rem,calc(1.5rem+env(safe-area-inset-bottom)))] sm:pb-16 w-full" aria-label="Site Footer">
   <div
-    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[16px] text-[#C1C1C1] font-normal"
+    class="flex items-center justify-between gap-4 text-[14px] sm:text-[16px] text-[#C1C1C1] font-normal"
   >
     <!-- Brand / Name -->
     <div>
@@ -21,12 +21,12 @@ const initialWitaTime = new Intl.DateTimeFormat('en-GB', {
     </div>
 
     <!-- Location & Live WITA Clock (Samarinda, UTC+8) -->
-    <div class="flex items-center justify-between w-full sm:w-[255px]">
-      <span>Samarinda, Indonesia</span>
+    <div class="flex items-center gap-4 sm:gap-6 whitespace-nowrap">
+      <span class="whitespace-nowrap">Samarinda, Indonesia</span>
       <time
         id="wita-clock"
         datetime=""
-        class="font-sans tabular-nums select-none"
+        class="font-sans tabular-nums select-none whitespace-nowrap"
         title="Waktu Indonesia Tengah (WITA / UTC+8)"
       >
         {initialWitaTime}

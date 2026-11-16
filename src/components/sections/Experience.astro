@@ -20,9 +20,9 @@ const experiences = [
 ];
 ---
 
-<section id="experience" class="flex flex-col gap-[26px] pb-5" aria-labelledby="experience-heading">
+<section id="experience" class="flex flex-col gap-5 sm:gap-[26px] pb-4 sm:pb-5" aria-labelledby="experience-heading">
   <!-- Section Title (Geist 24px, #FFFFFF) -->
-  <h2 id="experience-heading" class="text-[24px] font-normal text-[#FFFFFF]">
+  <h2 id="experience-heading" class="text-[20px] sm:text-[24px] font-normal text-[#FFFFFF]">
     Experience
   </h2>
 
@@ -31,13 +31,13 @@ const experiences = [
     {
       experiences.map((item, index) => (
         <>
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[16px] text-[#C1C1C1] font-normal">
-            <span>{item.role}</span>
-            <span class="text-[#C1C1C1]/80 sm:text-[#C1C1C1]">{item.period}</span>
+          <div class="flex items-start justify-between gap-4 text-[15px] sm:text-[16px] text-[#C1C1C1] font-normal">
+            <span class="min-w-0 flex-1">{item.role}</span>
+            <span class="text-right shrink-0 max-w-[48%] sm:max-w-none">{item.period}</span>
           </div>
           {index < experiences.length - 1 && (
             <div
-              class="w-px h-[29px] bg-[#C1C1C1] mr-[20px] self-end"
+              class="w-px h-[24px] sm:h-[29px] bg-[#C1C1C1] mr-[14px] sm:mr-[20px] self-end"
               aria-hidden="true"
             />
           )}
