@@ -1,60 +1,73 @@
 ---
-const links = [
-  { label: 'WORK', href: '#projects' },
-  { label: 'SERVICES', href: '#skills' },
-  { label: 'STUDIO', href: '#about' },
-  { label: 'INFO', href: '#contact' },
-];
+// Navbar matching Figma Desktop - 1
 ---
 
-<header
-  class="fixed inset-x-0 top-0 z-50 transition-opacity duration-500"
-  id="site-header"
->
-  <nav
-    class="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10"
-    aria-label="Primary"
-  >
-    <a
-      href="/"
-      class="text-xl font-black tracking-tight text-ink transition-opacity hover:opacity-60"
-    >
-      craft.
-    </a>
+<header class="w-full pt-6 pb-12">
+  <nav class="flex items-center justify-between" aria-label="Main Navigation">
+    <!-- Left: Menu Button & Cmd + K Shortcut -->
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        id="menu-toggle-btn"
+        class="inline-flex items-center justify-center px-3.5 py-0.5 rounded border border-[#848484] text-[#FFFFFF] text-base hover:bg-white/5 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#848484]"
+      >
+        Menu
+      </button>
 
-    <ul
-      class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 font-mono text-[11px] tracking-[0.2em] text-ink/70 md:flex"
-    >
-      {
-        links.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="transition-colors hover:text-ink"
-            >
-              {link.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+      <!-- Keyboard Shortcut Indicator -->
+      <div class="flex items-center gap-2 text-[#BFBFBF]" aria-label="Shortcut: Command K">
+        <span
+          class="inline-flex items-center justify-center w-[25px] h-[25px] rounded-[2px] border border-[#848484] text-xs select-none"
+          title="Command"
+        >
+          <svg
+            class="w-3.5 h-3.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <!-- Mac Command Symbol ⌘ -->
+            <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
+          </svg>
+        </span>
+        <span
+          class="inline-flex items-center justify-center w-[25px] h-[25px] rounded-[2px] border border-[#848484] text-sm font-normal select-none"
+        >
+          K
+        </span>
+      </div>
+    </div>
 
-    <a href="#contact" class="pill-solid text-[13px]">
-      Start a project <span aria-hidden="true">↗</span>
-    </a>
+    <!-- Right: Dark Mode Indicator / Button -->
+    <div>
+      <button
+        type="button"
+        id="theme-btn"
+        class="inline-flex items-center justify-center px-3.5 py-0.5 rounded border border-[#848484] text-[#FFFFFF] text-base hover:bg-white/5 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#848484]"
+      >
+        Dark
+      </button>
+    </div>
   </nav>
 </header>
 
 <script>
-  const header = document.getElementById('site-header');
-  if (header) {
-    let lastY = window.scrollY;
-    const onScroll = () => {
-      const y = window.scrollY;
-      header.classList.toggle('opacity-0', y > lastY && y > 120);
-      header.classList.toggle('pointer-events-none', y > lastY && y > 120);
-      lastY = y;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-  }
+  // Keyboard shortcut listener for Cmd+K / Ctrl+K
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      const menuBtn = document.getElementById('menu-toggle-btn');
+      menuBtn?.click();
+    }
+  });
+
+  const menuBtn = document.getElementById('menu-toggle-btn');
+  menuBtn?.addEventListener('click', () => {
+    // Scroll to experience or projects
+    const target = document.getElementById('experience');
+    target?.scrollIntoView({ behavior: 'smooth' });
+  });
 </script>

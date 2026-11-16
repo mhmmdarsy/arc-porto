@@ -1,60 +1,48 @@
 ---
-import SectionHeader from '../SectionHeader.astro';
-
+// Experience Section matching Figma Desktop - 1
 const experiences = [
   {
-    year: 'Aug 2025 — Dec 2025',
-    title: 'Independent Study',
-    company: 'Accenture & Dicoding',
-    description:
-      'Selected as a participant in the Asah Independent Study Cohort by Accenture and Dicoding, completing the React & Backend with AI learning path.\n\nBuilt and deployed a Sales Portal web application using React.js and Tailwind CSS. Integrated RESTful APIs with Express.js and Supabase for data management. Handled client-side deployment using Vercel.',
+    role: 'Software Engineer Freelance',
+    period: 'Apr 2026 - Now',
   },
   {
-    year: 'Sep 2025 — Nov 2025',
-    title: 'Laboratory Assistant',
-    company: 'Mulawarman University',
-    description:
-      'Assisted and mentored students in object-oriented programming (OOP) using Java, focusing on core concepts such as classes, inheritance, and encapsulation, while providing debugging support for student assignments and practical sessions.',
+    role: 'UI/UX Designer Intern',
+    period: 'Jan - May 2026',
+  },
+  {
+    role: 'Laboratory Assistant',
+    period: 'Sep - Nov 2025 & Feb - Apr 2026',
+  },
+  {
+    role: 'Web Development Bootcamp (ASAH Program)',
+    period: 'Aug 2025 - Jan 2026',
   },
 ];
 ---
 
-<section id="experience" class="scroll-mt-20 bg-canvas py-28 md:py-36">
-  <div class="mx-auto max-w-7xl px-6 md:px-10">
-    <SectionHeader number="02" label="Experience" />
+<section id="experience" class="flex flex-col gap-[26px] pb-5" aria-labelledby="experience-heading">
+  <!-- Section Title (Geist 24px, #FFFFFF) -->
+  <h2 id="experience-heading" class="text-[24px] font-normal text-[#FFFFFF]">
+    Experience
+  </h2>
 
-    <h2
-      class="mb-16 text-5xl font-black uppercase leading-[0.92] tracking-tighter md:mb-20 md:text-7xl lg:text-8xl"
-    >
-      Experience
-    </h2>
-
-    <div>
-      {
-        experiences.map((exp) => (
-          <div class="grid grid-cols-1 gap-5 border-t border-line py-10 md:grid-cols-12 md:gap-6 md:py-12">
-            <div class="md:col-span-3">
-              <p class="font-mono text-[11px] tracking-[0.18em] text-ink/40">
-                {exp.year}
-              </p>
-            </div>
-            <div class="md:col-span-4">
-              <h3 class="mb-2 text-2xl uppercase tracking-tight md:text-3xl">
-                {exp.title}
-              </h3>
-              <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/55">
-                {exp.company}
-              </p>
-            </div>
-            <div class="md:col-span-5">
-              <p class="whitespace-pre-line leading-relaxed text-ink/70">
-                {exp.description}
-              </p>
-            </div>
+  <!-- Experience List -->
+  <div class="flex flex-col gap-1.5">
+    {
+      experiences.map((item, index) => (
+        <>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[16px] text-[#C1C1C1] font-normal">
+            <span>{item.role}</span>
+            <span class="text-[#C1C1C1]/80 sm:text-[#C1C1C1]">{item.period}</span>
           </div>
-        ))
-      }
-      <div class="border-t border-line"></div>
-    </div>
+          {index < experiences.length - 1 && (
+            <div
+              class="w-px h-[29px] bg-[#C1C1C1] mr-[20px] self-end"
+              aria-hidden="true"
+            />
+          )}
+        </>
+      ))
+    }
   </div>
 </section>

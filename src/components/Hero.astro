@@ -1,60 +1,59 @@
 ---
-import Navbar from './Navbar.astro';
+// Hero component matching Figma Desktop - 1
 ---
 
-<Navbar />
-
-<section
-  id="top"
-  class="dot-grid relative h-screen min-h-[680px] overflow-hidden"
->
-  <!-- interactive pixel wave -->
-  <div class="pointer-events-none absolute inset-0 z-0 opacity-45 md:opacity-100">
-    <canvas id="wave" class="h-full w-full"></canvas>
-  </div>
-
-  <!-- mono eyebrows -->
-  <div
-    class="absolute left-6 top-28 z-10 font-mono text-[10px] leading-relaxed tracking-[0.22em] text-ink/45 md:left-10 md:text-[11px]"
+<section class="flex flex-col gap-8 sm:gap-[46px] pt-32 sm:pt-[280px] pb-4" aria-labelledby="hero-heading">
+  <!-- Heading (Geist 40px, #FFFFFF) -->
+  <h1
+    id="hero-heading"
+    class="text-[32px] sm:text-[40px] leading-[1.2] font-normal text-[#FFFFFF] tracking-normal"
   >
-    based in samarinda, east kalimantan
-  </div>
+    Hello, my name is Arsy. Software Engineer<br class="hidden sm:inline" /> based in Samarinda, Indonesia.
+  </h1>
 
-  <!-- main content -->
-  <div
-    class="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col justify-end px-6 pb-10 md:px-10 md:pb-14"
-  >
-    <div class="grid grid-cols-1 items-end gap-12 lg:grid-cols-12 lg:gap-8">
-      <h1
-        class="font-black uppercase leading-[0.84] tracking-[-0.045em] text-ink lg:col-span-9"
-        style="font-size: clamp(2.75rem, 9vw, 8.75rem)"
+  <!-- Bio Descriptions (Geist 16px, #C1C1C1) -->
+  <div class="flex flex-col gap-6 text-[16px] leading-[1.6] text-[#C1C1C1] font-normal">
+    <p>
+      I am currently pursuing a Bachelor’s degree in{' '}
+      <span class="underline underline-offset-4">Information Systems</span>{' '}
+      at{' '}
+      <span class="underline underline-offset-4">Mulawarman University</span>.
+      Interested in Website Developer &amp; UI/UX to building web with nice looking interfaces.
+    </p>
+
+    <p>
+      I graduated from the 958-hour{' '}
+      <span class="underline underline-offset-4">ASAH Program</span>{' '}
+      led by{' '}
+      <a
+        href="https://www.dicoding.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-[#155EEF] underline underline-offset-4 hover:opacity-80 transition-opacity"
       >
-        <span class="block">Craft,</span>
-        <span class="block">Engineered.</span>
-      </h1>
+        Dicoding
+      </a>{' '}
+      &amp;{' '}
+      <a
+        href="https://www.accenture.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-[#A100FF] underline underline-offset-4 hover:opacity-80 transition-opacity"
+      >
+        Accenture
+      </a>{' '}
+      with a 95/100 final project score, and learn a lot of React.js &amp; Node.js.
+      I also have experience as a Laboratory Assistant, mentoring 100+ students.
+    </p>
 
-      <div class="max-w-[300px] lg:col-span-3 lg:col-start-10">
-        <p class="text-[15px] leading-relaxed text-ink/75">
-          An independent portfolio and creative studio designing digital
-          products, websites, and brand experiences with artful precision and
-          code.
-        </p>
-        <div class="mt-7 flex flex-wrap items-center gap-3">
-          <a href="#contact" class="pill-solid">
-            Collaborate <span aria-hidden="true">↗</span>
-          </a>
-          <a href="#projects" class="pill-ghost"> View our work </a>
-        </div>
-      </div>
-    </div>
+    <p>
+      For more information, go to{' '}
+      <a
+        href="#about"
+        class="underline underline-offset-4 hover:text-[#FFFFFF] transition-colors"
+      >
+        about
+      </a>.
+    </p>
   </div>
 </section>
-
-<script>
-  import { initPixelWave } from '../scripts/pixel-wave';
-
-  const canvas = document.getElementById('wave');
-  if (canvas instanceof HTMLCanvasElement) {
-    initPixelWave(canvas);
-  }
-</script>

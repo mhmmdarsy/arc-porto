@@ -1,18 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Clarity+City:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --color-canvas: #f8f8f8;
-  --color-ink: #0a0a0a;
-  --color-ink-soft: #525252;
-  --color-line: rgba(10, 10, 10, 0.12);
+  --color-canvas: #060e13;
+  --color-ink: #ffffff;
+  --color-ink-muted: #c1c1c1;
+  --color-ink-subtle: #848484;
+  --color-line: rgba(132, 132, 132, 0.4);
 
-  --color-wave-900: #5b21b6;
-  --color-wave-700: #7c3aed;
-  --color-wave-400: #a78bfa;
-  --color-wave-200: #ddd6fe;
+  --color-accent-blue: #155eef;
+  --color-accent-purple: #a100ff;
 
-  --font-sans: 'Clarity City', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
 }
 
@@ -20,6 +19,7 @@
   html {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    color-scheme: dark;
   }
 
   body {
@@ -30,7 +30,7 @@
   }
 
   ::selection {
-    background-color: var(--color-wave-700);
+    background-color: #1e293b;
     color: #fff;
   }
 }

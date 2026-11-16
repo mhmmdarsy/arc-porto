@@ -1,0 +1,98 @@
+---
+// Social Section matching Figma Desktop - 1
+const socials = [
+  {
+    platform: 'GitHub',
+    handle: 'mhmmdarsy',
+    url: 'https://github.com/mhmmdarsy',
+  },
+  {
+    platform: 'LinkedIn',
+    handle: 'nvr_arc',
+    url: 'https://linkedin.com/in/nvr-arc',
+  },
+  {
+    platform: 'X (formerly Twitter)',
+    handle: 'nvr_arc',
+    url: 'https://x.com/nvr_arc',
+  },
+];
+
+const email = 'muhammadarsyalfahd@gmail.com';
+---
+
+<section id="social" class="flex flex-col gap-6 py-6" aria-labelledby="social-heading">
+  <!-- Section Title (Geist 24px, #FFFFFF) -->
+  <h2 id="social-heading" class="text-[24px] font-normal text-[#FFFFFF]">
+    Social
+  </h2>
+
+  <div class="flex flex-col gap-6 text-[16px]">
+    <!-- Email with Copy Button -->
+    <div class="flex flex-col gap-1.5">
+      <span class="text-[#C1C1C1]">Email</span>
+      <div class="flex flex-wrap items-center gap-3">
+        <a
+          href={`mailto:${email}`}
+          class="text-[#FFFFFF] underline underline-offset-4 hover:opacity-80 transition-opacity break-all"
+        >
+          {email}
+        </a>
+        <button
+          type="button"
+          id="copy-email-btn"
+          data-email={email}
+          class="inline-flex items-center justify-center px-2.5 py-1 rounded border border-[#848484] text-[#C1C1C1] text-sm hover:text-white hover:border-white transition-colors focus:outline-none"
+        >
+          <span id="copy-text">Copy</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Other Social Accounts -->
+    {
+      socials.map((social) => (
+        <div class="flex flex-col gap-1.5">
+          <span class="text-[#C1C1C1]">{social.platform}</span>
+          <div>
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[#FFFFFF] underline underline-offset-4 hover:opacity-80 transition-opacity inline-block"
+            >
+              {social.handle}
+            </a>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const copyBtn = document.getElementById('copy-email-btn');
+  const copyText = document.getElementById('copy-text');
+
+  copyBtn?.addEventListener('click', async () => {
+    const email = copyBtn.getAttribute('data-email');
+    if (!email || !copyText) return;
+
+    try {
+      await navigator.clipboard.writeText(email);
+      copyText.textContent = 'Copied!';
+      copyBtn.classList.add('border-emerald-500', 'text-emerald-400');
+
+      setTimeout(() => {
+        copyText.textContent = 'Copy';
+        copyBtn.classList.remove('border-emerald-500', 'text-emerald-400');
+      }, 2000);
+    } catch {
+      // Fallback
+      copyText.textContent = 'Copied!';
+      setTimeout(() => {
+        copyText.textContent = 'Copy';
+      }, 2000);
+    }
+  });
+</script>

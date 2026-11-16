@@ -1,22 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
-import About from '../components/sections/About.astro';
 import Experience from '../components/sections/Experience.astro';
-import Skills from '../components/sections/Skills.astro';
 import Projects from '../components/sections/Projects.astro';
-import Contact from '../components/sections/Contact.astro';
+import Social from '../components/sections/Social.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Base>
-  <Hero />
-  <main>
-    <About />
-    <Experience />
-    <Skills />
-    <Projects />
-    <Contact />
-  </main>
-  <Footer />
+  <div class="min-h-screen bg-[#060E13] text-[#FFFFFF] selection:bg-white/20 selection:text-white">
+    <!-- Centered Container matching Figma 896px content width -->
+    <div class="max-w-[896px] sm:max-w-[960px] mx-auto px-6 sm:px-8 flex flex-col min-h-screen justify-between">
+      <div>
+        <Navbar />
+        <main class="flex flex-col gap-10">
+          <Hero />
+          <Experience />
+          <Projects />
+          <div class="pt-12 sm:pt-20">
+            <Social />
+          </div>
+        </main>
+      </div>
+      <Footer />
+    </div>
+  </div>
 </Base>
