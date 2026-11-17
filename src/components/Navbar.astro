@@ -1,5 +1,12 @@
 ---
-// Navbar matching Figma Desktop - 1
+// Navbar & iOS-style GSAP Menu Overlay matching Figma Desktop - 1 & #4:113
+const navItems = [
+  { index: '01', label: 'Home', href: '#' },
+  { index: '02', label: 'About', href: '#hero-heading' },
+  { index: '03', label: 'Experience', href: '#experience' },
+  { index: '04', label: 'Projects', href: '#projects' },
+  { index: '05', label: 'Social', href: '#social' },
+];
 ---
 
 <header class="w-full pt-[max(1.25rem,env(safe-area-inset-top))] sm:pt-6 pb-6 sm:pb-12">
@@ -9,6 +16,8 @@
       <button
         type="button"
         id="menu-toggle-btn"
+        aria-expanded="false"
+        aria-controls="menu-overlay"
         class="inline-flex items-center justify-center px-3.5 py-0.5 rounded border border-[#848484] text-[#FFFFFF] text-base hover:bg-white/5 active:scale-[0.97] active:bg-white/10 transition-[transform,background-color] duration-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#848484]"
       >
         Menu
@@ -54,20 +63,362 @@
   </nav>
 </header>
 
-<script>
-  // Keyboard shortcut listener for Cmd+K / Ctrl+K
-  window.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault();
-      const menuBtn = document.getElementById('menu-toggle-btn');
-      menuBtn?.click();
-    }
-  });
+<!-- Centered Menu Overlay matching Figma node #4:113 (426x373, #060E13, 1px #848484, 4px radius) -->
+<div
+  id="menu-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="menu-overlay-title"
+  aria-hidden="true"
+  class="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
+>
+  <!-- Translucent Backdrop -->
+  <div
+    id="menu-backdrop"
+    class="absolute inset-0 bg-black/60 backdrop-blur-[4px] opacity-0"
+  ></div>
 
-  const menuBtn = document.getElementById('menu-toggle-btn');
-  menuBtn?.addEventListener('click', () => {
-    // Scroll to experience or projects
-    const target = document.getElementById('experience');
-    target?.scrollIntoView({ behavior: 'smooth' });
-  });
+  <!-- Menu Modal Panel -->
+  <div
+    id="menu-panel"
+    style="visibility: hidden;"
+    class="relative z-10 w-[min(426px,calc(100vw-2.5rem))] min-h-[373px] bg-[#060E13] border border-[#848484] rounded-[4px] p-6 flex flex-col justify-between opacity-0 will-change-[transform,opacity]"
+  >
+    <!-- Overlay Top Bar -->
+    <div class="flex items-center justify-between pb-4 border-b border-[#848484]/30">
+      <span id="menu-overlay-title" class="text-[16px] text-[#FFFFFF] font-normal">
+        Menu
+      </span>
+      <button
+        type="button"
+        id="menu-close-btn"
+        class="inline-flex items-center justify-center gap-1.5 px-3 py-0.5 rounded-[4px] border border-[#848484] text-[#C1C1C1] text-sm hover:text-[#FFFFFF] active:scale-[0.97] active:bg-white/10 transition-[transform,background-color,color] duration-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#848484]"
+      >
+        <span>Close</span>
+        <span class="text-[#848484] text-xs">Esc</span>
+      </button>
+    </div>
+
+    <!-- Navigation List -->
+    <nav class="flex flex-col gap-1 py-4" aria-label="Menu Navigation">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            data-menu-item
+            class="menu-nav-link flex items-center justify-between px-2 py-2 rounded-[4px] text-[18px] text-[#C1C1C1] font-normal focus:outline-none focus-visible:ring-1 focus-visible:ring-[#848484]"
+          >
+            <span>{item.label}</span>
+            <span class="font-mono text-xs text-[#848484]">{item.index}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Overlay Footer Row -->
+    <div
+      data-menu-item
+      class="flex items-center justify-between pt-4 border-t border-[#848484]/30 text-xs text-[#848484]"
+    >
+      <span>Samarinda, Indonesia</span>
+      <span class="font-mono">⌘ + K / ESC</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  import gsap from 'gsap';
+
+  /**
+   * Exact CSS cubic-bezier solver so GSAP follows the animate skill curves
+   * (--ease-drawer and --ease-out) without approximations.
+   */
+  function cubicBezier(x1: number, y1: number, x2: number, y2: number) {
+    const cx = 3 * x1;
+    const bx = 3 * (x2 - x1) - cx;
+    const ax = 1 - cx - bx;
+
+    const cy = 3 * y1;
+    const by = 3 * (y2 - y1) - cy;
+    const ay = 1 - cy - by;
+
+    const sampleX = (t: number) => ((ax * t + bx) * t + cx) * t;
+    const sampleY = (t: number) => ((ay * t + by) * t + cy) * t;
+    const sampleDerivativeX = (t: number) => (3 * ax * t + 2 * bx) * t + cx;
+
+    const solveT = (x: number) => {
+      let t = x;
+      for (let i = 0; i < 6; i++) {
+        const dx = sampleX(t) - x;
+        if (Math.abs(dx) < 1e-6) return t;
+        const d = sampleDerivativeX(t);
+        if (Math.abs(d) < 1e-6) break;
+        t -= dx / d;
+      }
+      let lo = 0;
+      let hi = 1;
+      t = x;
+      while (lo < hi) {
+        const currentX = sampleX(t);
+        if (Math.abs(currentX - x) < 1e-6) return t;
+        if (x > currentX) lo = t;
+        else hi = t;
+        t = (lo + hi) * 0.5;
+        if (hi - lo < 1e-6) break;
+      }
+      return t;
+    };
+
+    return (u: number) => {
+      if (u <= 0) return 0;
+      if (u >= 1) return 1;
+      return sampleY(solveT(u));
+    };
+  }
+
+  const easeDrawer = cubicBezier(0.32, 0.72, 0, 1); // --ease-drawer
+  const easeOut = cubicBezier(0.23, 1, 0.32, 1); // --ease-out
+
+  const menuBtn = document.getElementById('menu-toggle-btn') as HTMLButtonElement | null;
+  const overlay = document.getElementById('menu-overlay') as HTMLDivElement | null;
+  const backdrop = document.getElementById('menu-backdrop') as HTMLDivElement | null;
+  const panel = document.getElementById('menu-panel') as HTMLDivElement | null;
+  const closeBtn = document.getElementById('menu-close-btn') as HTMLButtonElement | null;
+
+  if (menuBtn && overlay && backdrop && panel) {
+    const menuItems = Array.from(panel.querySelectorAll<HTMLElement>('[data-menu-item]'));
+    const navLinks = Array.from(panel.querySelectorAll<HTMLAnchorElement>('.menu-nav-link'));
+
+    let isOpen = false;
+    let lastFocusedEl: HTMLElement | null = null;
+
+    const prefersReducedMotion = () =>
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const getOriginOffsets = () => {
+      const btnRect = menuBtn.getBoundingClientRect();
+      const btnCenterX = btnRect.left + btnRect.width / 2;
+      const btnCenterY = btnRect.top + btnRect.height / 2;
+
+      // offsetLeft/Top/Width/Height ignore active CSS transforms, giving the exact
+      // centered identity rect even if interrupted mid-flight.
+      const panelWidth = panel.offsetWidth || 426;
+      const panelHeight = panel.offsetHeight || 373;
+      const panelCenterX = panel.offsetLeft + panelWidth / 2;
+      const panelCenterY = panel.offsetTop + panelHeight / 2;
+
+      return {
+        dx: btnCenterX - panelCenterX,
+        dy: btnCenterY - panelCenterY,
+        sx: Math.max(0.18, menuBtn.offsetWidth / panelWidth),
+        sy: Math.max(0.12, menuBtn.offsetHeight / panelHeight),
+      };
+    };
+
+    const openMenu = () => {
+      if (isOpen) return;
+      isOpen = true;
+      lastFocusedEl = document.activeElement as HTMLElement | null;
+
+      menuBtn.setAttribute('aria-expanded', 'true');
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.classList.remove('pointer-events-none');
+      overlay.classList.add('pointer-events-auto');
+
+      const wasAnimating = gsap.isTweening(panel);
+      gsap.killTweensOf([panel, backdrop, menuBtn, ...menuItems]);
+
+      if (prefersReducedMotion()) {
+        gsap.set(panel, {
+          visibility: 'visible',
+          x: 0,
+          y: 0,
+          scaleX: 1,
+          scaleY: 1,
+        });
+        gsap.to(panel, { opacity: 1, duration: 0.18, ease: easeOut });
+        gsap.to(backdrop, { opacity: 1, duration: 0.18, ease: easeOut });
+        gsap.set(menuItems, { opacity: 1, y: 0 });
+        gsap.to(menuBtn, { opacity: 0, duration: 0.18, ease: easeOut });
+        closeBtn?.focus({ preventScroll: true });
+        return;
+      }
+
+      const { dx, dy, sx, sy } = getOriginOffsets();
+
+      if (!wasAnimating) {
+        gsap.set(panel, {
+          visibility: 'visible',
+          x: dx,
+          y: dy,
+          scaleX: sx,
+          scaleY: sy,
+          opacity: 0,
+        });
+      } else {
+        gsap.set(panel, { visibility: 'visible' });
+      }
+
+      gsap.to(panel, {
+        x: 0,
+        y: 0,
+        scaleX: 1,
+        scaleY: 1,
+        opacity: 1,
+        duration: 0.38,
+        ease: easeDrawer,
+        overwrite: 'auto',
+      });
+
+      gsap.to(backdrop, {
+        opacity: 1,
+        duration: 0.32,
+        ease: easeOut,
+        overwrite: 'auto',
+      });
+
+      gsap.to(menuBtn, {
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.18,
+        ease: easeOut,
+        overwrite: 'auto',
+      });
+
+      gsap.fromTo(
+        menuItems,
+        { opacity: 0, y: 8 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.24,
+          stagger: 0.035,
+          delay: wasAnimating ? 0.02 : 0.1,
+          ease: easeOut,
+          overwrite: 'auto',
+        },
+      );
+
+      closeBtn?.focus({ preventScroll: true });
+    };
+
+    const closeMenu = (restoreFocus = true) => {
+      if (!isOpen) return;
+      isOpen = false;
+
+      menuBtn.setAttribute('aria-expanded', 'false');
+      overlay.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('pointer-events-auto');
+      overlay.classList.add('pointer-events-none');
+
+      gsap.killTweensOf([panel, backdrop, menuBtn, ...menuItems]);
+
+      if (prefersReducedMotion()) {
+        gsap.to(panel, {
+          opacity: 0,
+          duration: 0.18,
+          ease: easeOut,
+          onComplete: () => {
+            if (!isOpen) gsap.set(panel, { visibility: 'hidden' });
+          },
+        });
+        gsap.to(backdrop, { opacity: 0, duration: 0.18, ease: easeOut });
+        gsap.to(menuBtn, { opacity: 1, duration: 0.18, ease: easeOut });
+        if (restoreFocus && lastFocusedEl) {
+          lastFocusedEl.focus({ preventScroll: true });
+        }
+        return;
+      }
+
+      const { dx, dy, sx, sy } = getOriginOffsets();
+
+      gsap.to(menuItems, {
+        opacity: 0,
+        duration: 0.14,
+        ease: easeOut,
+        overwrite: 'auto',
+      });
+
+      gsap.to(panel, {
+        x: dx,
+        y: dy,
+        scaleX: sx,
+        scaleY: sy,
+        opacity: 0,
+        duration: 0.25,
+        ease: easeOut,
+        overwrite: 'auto',
+        onComplete: () => {
+          if (!isOpen) gsap.set(panel, { visibility: 'hidden' });
+        },
+      });
+
+      gsap.to(backdrop, {
+        opacity: 0,
+        duration: 0.24,
+        ease: easeOut,
+        overwrite: 'auto',
+      });
+
+      gsap.to(menuBtn, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.22,
+        delay: 0.05,
+        ease: easeOut,
+        overwrite: 'auto',
+      });
+
+      if (restoreFocus && lastFocusedEl) {
+        lastFocusedEl.focus({ preventScroll: true });
+      }
+    };
+
+    menuBtn.addEventListener('click', () => {
+      if (isOpen) closeMenu();
+      else openMenu();
+    });
+
+    closeBtn?.addEventListener('click', () => closeMenu());
+    backdrop.addEventListener('click', () => closeMenu());
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        closeMenu(false);
+
+        if (href === '#') {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+          });
+          return;
+        }
+
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          target?.scrollIntoView({
+            behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+          });
+        }
+      });
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        closeMenu();
+        return;
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (isOpen) closeMenu();
+        else openMenu();
+      }
+    });
+  }
 </script>

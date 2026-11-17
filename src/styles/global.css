@@ -13,6 +13,10 @@
 
   --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @layer base {
@@ -47,5 +51,23 @@
   ::selection {
     background-color: #14223c;
     color: #3b82f6;
+  }
+}
+
+.menu-nav-link {
+  transition:
+    transform 120ms var(--ease-out),
+    background-color 150ms var(--ease-out),
+    color 150ms var(--ease-out);
+}
+
+.menu-nav-link:active {
+  transform: scale(0.98);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
   }
 }
