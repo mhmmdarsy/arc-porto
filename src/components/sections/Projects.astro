@@ -10,8 +10,8 @@ const projects = [
 ---
 
 <section id="projects" class="flex flex-col gap-5 sm:gap-6 py-4 sm:py-6" aria-labelledby="projects-heading">
-  <!-- Section Title (Geist 24px, #FFFFFF) -->
-  <h2 id="projects-heading" class="text-[20px] sm:text-[24px] font-normal text-[#FFFFFF]">
+  <!-- Section Title (Geist 24px) -->
+  <h2 id="projects-heading" class="text-[20px] sm:text-[24px] font-normal text-ink">
     Projects
   </h2>
 
@@ -21,7 +21,7 @@ const projects = [
       projects.map((project) => (
         <a
           href={project.link}
-          class="group flex items-center justify-between gap-4 text-[15px] sm:text-[16px] text-[#C1C1C1] font-normal hover:text-[#FFFFFF] transition-colors"
+          class="group flex items-center justify-between gap-4 text-[15px] sm:text-[16px] text-ink-muted font-normal hover:text-ink transition-colors"
         >
           <span class="group-hover:underline underline-offset-4">{project.name}</span>
           <span>{project.year}</span>

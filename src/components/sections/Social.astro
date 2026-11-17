@@ -22,19 +22,19 @@ const email = 'muhammadarsyalfahd@gmail.com';
 ---
 
 <section id="social" class="flex flex-col gap-5 sm:gap-6 py-4 sm:py-6" aria-labelledby="social-heading">
-  <!-- Section Title (Geist 24px, #FFFFFF) -->
-  <h2 id="social-heading" class="text-[20px] sm:text-[24px] font-normal text-[#FFFFFF]">
+  <!-- Section Title (Geist 24px) -->
+  <h2 id="social-heading" class="text-[20px] sm:text-[24px] font-normal text-ink">
     Social
   </h2>
 
   <div class="flex flex-col gap-5 sm:gap-6 text-[15px] sm:text-[16px]">
     <!-- Email with Copy Button -->
     <div class="flex flex-col gap-1.5">
-      <span class="text-[#C1C1C1]">Email</span>
+      <span class="text-ink-muted">Email</span>
       <div class="flex flex-wrap items-center gap-3">
         <a
           href={`mailto:${email}`}
-          class="text-[#FFFFFF] underline underline-offset-4 hover:opacity-80 transition-opacity break-all"
+          class="text-ink underline underline-offset-4 hover:bg-selection-bg hover:text-selection-fg transition-colors break-all"
         >
           {email}
         </a>
@@ -42,7 +42,7 @@ const email = 'muhammadarsyalfahd@gmail.com';
           type="button"
           id="copy-email-btn"
           data-email={email}
-          class="inline-flex items-center justify-center px-2.5 py-1 rounded border border-[#848484] text-[#C1C1C1] text-sm hover:text-white hover:border-white active:scale-[0.97] active:bg-white/10 transition-[transform,background-color,color,border-color] duration-100 shrink-0 focus:outline-none"
+          class="theme-btn-surface inline-flex items-center justify-center px-2.5 py-1 rounded border border-ink-subtle text-ink-muted text-sm hover:text-ink hover:border-ink shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-ink-subtle"
         >
           <span id="copy-text">Copy</span>
         </button>
@@ -53,13 +53,13 @@ const email = 'muhammadarsyalfahd@gmail.com';
     {
       socials.map((social) => (
         <div class="flex flex-col gap-1.5">
-          <span class="text-[#C1C1C1]">{social.platform}</span>
+          <span class="text-ink-muted">{social.platform}</span>
           <div>
             <a
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-[#FFFFFF] underline underline-offset-4 hover:opacity-80 transition-opacity inline-block"
+              class="text-ink underline underline-offset-4 hover:bg-selection-bg hover:text-selection-fg transition-colors inline-block"
             >
               {social.handle}
             </a>
@@ -81,11 +81,11 @@ const email = 'muhammadarsyalfahd@gmail.com';
     try {
       await navigator.clipboard.writeText(email);
       copyText.textContent = 'Copied!';
-      copyBtn.classList.add('border-emerald-500', 'text-emerald-400');
+      copyBtn.classList.add('border-emerald-500', 'text-emerald-500');
 
       setTimeout(() => {
         copyText.textContent = 'Copy';
-        copyBtn.classList.remove('border-emerald-500', 'text-emerald-400');
+        copyBtn.classList.remove('border-emerald-500', 'text-emerald-500');
       }, 2000);
     } catch {
       // Fallback
