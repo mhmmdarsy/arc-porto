@@ -548,9 +548,9 @@ const navItems = [
         return;
       }
 
-      const duration = reduced ? 0.18 : 0.24;
-      gsap.to(darkEl, { ...darkProps, duration, ease: easeOut, overwrite: 'auto' });
-      gsap.to(lightEl, { ...lightProps, duration, ease: easeOut, overwrite: 'auto' });
+      const duration = reduced ? 0.25 : 0.45;
+      gsap.to(darkEl, { ...darkProps, duration, ease: easeDrawer, overwrite: 'auto' });
+      gsap.to(lightEl, { ...lightProps, duration, ease: easeDrawer, overwrite: 'auto' });
     };
 
     const updateButtonState = (theme: Theme, animate: boolean) => {
@@ -660,7 +660,7 @@ const navItems = [
 
           activeStageTween = gsap.to(transitionStage, {
             opacity: 1,
-            duration: 0.18,
+            duration: 0.3,
             ease: easeOut,
             overwrite: 'auto',
             onComplete: () => finalizeStage(activeTheme),
@@ -679,8 +679,8 @@ const navItems = [
 
         activeStageTween = gsap.to(clipState, {
           r: maxRadius,
-          duration: 0.5,
-          ease: easeOut,
+          duration: 1.0,
+          ease: easeDrawer,
           onUpdate: () => {
             transitionStage.style.clipPath = `circle(${clipState.r}px at ${originX}px ${originY}px)`;
           },
@@ -697,7 +697,7 @@ const navItems = [
         const targetOpacity = activeTheme === stageTheme ? 1 : 0;
         activeStageTween = gsap.to(transitionStage, {
           opacity: targetOpacity,
-          duration: 0.18,
+          duration: 0.3,
           ease: easeOut,
           overwrite: 'auto',
           onComplete: () => finalizeStage(activeTheme),
@@ -707,12 +707,12 @@ const navItems = [
 
       const expandingToStage = activeTheme === stageTheme;
       const targetRadius = expandingToStage ? maxRadius : 0;
-      const duration = expandingToStage ? 0.5 : 0.35;
+      const duration = expandingToStage ? 1.0 : 0.75;
 
       activeStageTween = gsap.to(clipState, {
         r: targetRadius,
         duration,
-        ease: easeOut,
+        ease: easeDrawer,
         onUpdate: () => {
           transitionStage.style.clipPath = `circle(${clipState.r}px at ${originX}px ${originY}px)`;
         },
