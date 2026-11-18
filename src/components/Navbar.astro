@@ -532,10 +532,12 @@ const navItems = [
 
       const reduced = prefersReducedMotion();
       const darkProps = {
+        y: 0,
         yPercent: reduced ? 0 : theme === 'dark' ? 0 : -100,
         opacity: theme === 'dark' ? 1 : 0,
       };
       const lightProps = {
+        y: 0,
         yPercent: reduced ? 0 : theme === 'light' ? 0 : 100,
         opacity: theme === 'light' ? 1 : 0,
       };
@@ -637,6 +639,8 @@ const navItems = [
         clonedShell = clone;
         cloneDarkLabel = clone.querySelector<HTMLElement>('[data-theme-label="dark"]');
         cloneLightLabel = clone.querySelector<HTMLElement>('[data-theme-label="light"]');
+        cloneDarkLabel?.removeAttribute('style');
+        cloneLightLabel?.removeAttribute('style');
 
         stageTheme = activeTheme;
         isStageVisible = true;

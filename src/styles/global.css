@@ -90,12 +90,10 @@
 html[data-theme='dark'] #theme-btn [data-theme-label='light'],
 html:not([data-theme]) #theme-btn [data-theme-label='light'] {
   opacity: 0;
-  transform: translateY(100%);
 }
 
 html[data-theme='light'] #theme-btn [data-theme-label='dark'] {
   opacity: 0;
-  transform: translateY(-100%);
 }
 
 .theme-btn-surface {
