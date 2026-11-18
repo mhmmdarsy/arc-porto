@@ -1,24 +1,6 @@
 ---
 // Social Section matching Figma Desktop - 1
-const socials = [
-  {
-    platform: 'GitHub',
-    handle: 'mhmmdarsy',
-    url: 'https://github.com/mhmmdarsy',
-  },
-  {
-    platform: 'LinkedIn',
-    handle: 'mhmdarsy',
-    url: 'https://linkedin.com/in/mhmdarsy',
-  },
-  {
-    platform: 'X (formerly Twitter)',
-    handle: 'nvr_arc',
-    url: 'https://x.com/nvr_arc',
-  },
-];
-
-const email = 'muhammadarsyalfahd@gmail.com';
+import { contactEmail, socials } from '@/data/portfolio';
 ---
 
 <section id="social" class="flex flex-col gap-5 sm:gap-6 py-4 sm:py-6" aria-labelledby="social-heading">
@@ -33,15 +15,15 @@ const email = 'muhammadarsyalfahd@gmail.com';
       <span class="text-ink-muted">Email</span>
       <div class="flex flex-wrap items-center gap-3">
         <a
-          href={`mailto:${email}`}
+          href={`mailto:${contactEmail}`}
           class="text-ink underline underline-offset-4 hover:bg-selection-bg hover:text-selection-fg transition-colors break-all"
         >
-          {email}
+          {contactEmail}
         </a>
         <button
           type="button"
           id="copy-email-btn"
-          data-email={email}
+          data-email={contactEmail}
           class="theme-btn-surface inline-flex items-center justify-center px-2.5 py-1 rounded border border-ink-subtle text-ink-muted text-sm hover:text-ink hover:border-ink shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-ink-subtle"
         >
           <span id="copy-text">Copy</span>
@@ -71,28 +53,7 @@ const email = 'muhammadarsyalfahd@gmail.com';
 </section>
 
 <script>
-  const copyBtn = document.getElementById('copy-email-btn');
-  const copyText = document.getElementById('copy-text');
+  import { initCopyEmail } from '@/scripts/copy-email';
 
-  copyBtn?.addEventListener('click', async () => {
-    const email = copyBtn.getAttribute('data-email');
-    if (!email || !copyText) return;
-
-    try {
-      await navigator.clipboard.writeText(email);
-      copyText.textContent = 'Copied!';
-      copyBtn.classList.add('border-emerald-500', 'text-emerald-500');
-
-      setTimeout(() => {
-        copyText.textContent = 'Copy';
-        copyBtn.classList.remove('border-emerald-500', 'text-emerald-500');
-      }, 2000);
-    } catch {
-      // Fallback
-      copyText.textContent = 'Copied!';
-      setTimeout(() => {
-        copyText.textContent = 'Copy';
-      }, 2000);
-    }
-  });
+  initCopyEmail();
 </script>

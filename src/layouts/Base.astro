@@ -1,6 +1,7 @@
 ---
-import '../styles/global.css';
+import '@/styles/global.css';
 import Analytics from '@vercel/analytics/astro';
+import { siteMeta } from '@/data/portfolio';
 
 interface Props {
   title?: string;
@@ -8,9 +9,8 @@ interface Props {
 }
 
 const {
-  title = 'Arsy - Software Engineer',
-  description =
-    'Software Engineer based in Samarinda, Indonesia. Interested in Website Developer & UI/UX to build web with nice looking interfaces.',
+  title = siteMeta.title,
+  description = siteMeta.description,
 } = Astro.props;
 ---
 
@@ -46,28 +46,9 @@ const {
   <body class="bg-canvas text-ink">
     <slot />
     <script>
-      import Lenis from 'lenis';
+      import { initSmoothScroll } from '@/scripts/smooth-scroll';
 
-      const reduced = window.matchMedia(
-        '(prefers-reduced-motion: reduce)',
-      ).matches;
-
-      if (!reduced) {
-        const lenis = new Lenis({
-          duration: 1.1,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          smoothWheel: true,
-          touchMultiplier: 2,
-        });
-
-        function raf(time: number) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        document.addEventListener('astro:before-swap', () => lenis.destroy());
-      }
+      initSmoothScroll();
     </script>
   </body>
 </html>
