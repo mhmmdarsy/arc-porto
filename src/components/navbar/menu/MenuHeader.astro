@@ -1,0 +1,17 @@
+---
+import { menuUiText } from '@/data/navigation';
+---
+
+<div class="flex items-center justify-between pb-4 border-b border-ink-subtle/30">
+  <span id="menu-overlay-title" class="text-[16px] text-ink font-normal">
+    {menuUiText.title}
+  </span>
+  <button
+    type="button"
+    id="menu-close-btn"
+    class="theme-btn-surface inline-flex items-center justify-center gap-1.5 px-3 py-0.5 rounded-[4px] border border-ink-subtle text-ink-muted text-sm hover:text-ink focus:outline-none focus-visible:ring-1 focus-visible:ring-ink-subtle"
+  >
+    <span>{menuUiText.closeLabel}</span>
+    <span class="text-ink-subtle text-xs">{menuUiText.closeKey}</span>
+  </button>
+</div>

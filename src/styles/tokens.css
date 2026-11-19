@@ -1,0 +1,51 @@
+@theme {
+  --color-canvas: #060e13;
+  --color-ink: #ffffff;
+  --color-ink-muted: #c1c1c1;
+  --color-ink-subtle: #848484;
+  --color-line: rgba(132, 132, 132, 0.4);
+  --color-surface-hover: rgba(255, 255, 255, 0.05);
+  --color-surface-active: rgba(255, 255, 255, 0.08);
+  --color-backdrop: rgba(0, 0, 0, 0.6);
+  --color-selection-bg: #14223c;
+  --color-selection-fg: #3b82f6;
+
+  --color-accent-blue: #155eef;
+  --color-accent-purple: #a100ff;
+
+  --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+:root,
+[data-theme='dark'] {
+  --color-canvas: #060e13;
+  --color-ink: #ffffff;
+  --color-ink-muted: #c1c1c1;
+  --color-ink-subtle: #848484;
+  --color-line: rgba(132, 132, 132, 0.4);
+  --color-surface-hover: rgba(255, 255, 255, 0.05);
+  --color-surface-active: rgba(255, 255, 255, 0.08);
+  --color-backdrop: rgba(0, 0, 0, 0.6);
+  --color-selection-bg: #14223c;
+  --color-selection-fg: #3b82f6;
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --color-canvas: #f8fafb;
+  --color-ink: #060e13;
+  --color-ink-muted: #4b5563;
+  --color-ink-subtle: #78828a;
+  --color-line: rgba(6, 14, 19, 0.2);
+  --color-surface-hover: rgba(6, 14, 19, 0.05);
+  --color-surface-active: rgba(6, 14, 19, 0.09);
+  --color-backdrop: rgba(6, 14, 19, 0.35);
+  --color-selection-bg: #dbeafe;
+  --color-selection-fg: #155eef;
+  color-scheme: light;
+}

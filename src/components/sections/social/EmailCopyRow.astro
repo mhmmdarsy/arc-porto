@@ -1,0 +1,33 @@
+---
+interface Props {
+  email: string;
+}
+
+const { email } = Astro.props;
+---
+
+<div class="flex flex-col gap-1.5">
+  <span class="text-ink-muted">Email</span>
+  <div class="flex flex-wrap items-center gap-3">
+    <a
+      href={`mailto:${email}`}
+      class="text-ink underline underline-offset-4 hover:bg-selection-bg hover:text-selection-fg transition-colors break-all"
+    >
+      {email}
+    </a>
+    <button
+      type="button"
+      id="copy-email-btn"
+      data-email={email}
+      class="theme-btn-surface inline-flex items-center justify-center px-2.5 py-1 rounded border border-ink-subtle text-ink-muted text-sm hover:text-ink hover:border-ink shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-ink-subtle"
+    >
+      <span id="copy-text">Copy</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  import { initCopyEmail } from '@/scripts/copy-email';
+
+  initCopyEmail();
+</script>

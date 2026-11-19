@@ -1,0 +1,23 @@
+---
+import type { ExperienceItem } from '@/data/experience';
+
+interface Props {
+  item: ExperienceItem;
+  showConnector?: boolean;
+}
+
+const { item, showConnector = false } = Astro.props;
+---
+
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 text-[15px] sm:text-[16px] text-ink-muted font-normal">
+  <span>{item.role}</span>
+  <span class="text-ink-muted/80 sm:text-ink-muted">{item.period}</span>
+</div>
+{
+  showConnector && (
+    <div
+      class="hidden sm:block w-px h-[29px] bg-ink-muted mr-[20px] self-end"
+      aria-hidden="true"
+    />
+  )
+}

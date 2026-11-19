@@ -1,4 +1,5 @@
 ---
+import MenuTrigger from '@/components/navbar/MenuTrigger.astro';
 import ThemeToggle from '@/components/navbar/ThemeToggle.astro';
 import MenuOverlay from '@/components/navbar/MenuOverlay.astro';
 ---
@@ -6,43 +7,7 @@ import MenuOverlay from '@/components/navbar/MenuOverlay.astro';
 <header class="w-full pt-[max(1.25rem,env(safe-area-inset-top))] sm:pt-6 pb-6 sm:pb-12">
   <nav class="flex items-center justify-between" aria-label="Main Navigation">
     <!-- Left: Menu Button & Cmd + K Shortcut -->
-    <div class="flex items-center gap-3">
-      <button
-        type="button"
-        id="menu-toggle-btn"
-        aria-expanded="false"
-        aria-controls="menu-overlay"
-        class="theme-btn-surface inline-flex items-center justify-center px-3.5 py-0.5 rounded border border-ink-subtle text-ink text-base focus:outline-none focus-visible:ring-1 focus-visible:ring-ink-subtle"
-      >
-        Menu
-      </button>
-
-      <!-- Keyboard Shortcut Indicator -->
-      <div class="flex items-center gap-2 text-ink-muted" aria-label="Shortcut: Command K">
-        <span
-          class="inline-flex items-center justify-center w-[25px] h-[25px] rounded-[2px] border border-ink-subtle text-xs select-none"
-          title="Command"
-        >
-          <svg
-            class="w-3.5 h-3.5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <!-- Mac Command Symbol ⌘ -->
-            <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
-          </svg>
-        </span>
-        <span
-          class="inline-flex items-center justify-center w-[25px] h-[25px] rounded-[2px] border border-ink-subtle text-sm font-normal select-none"
-        >
-          K
-        </span>
-      </div>
-    </div>
+    <MenuTrigger />
 
     <!-- Right: Theme Toggle Button -->
     <ThemeToggle />
@@ -50,11 +15,3 @@ import MenuOverlay from '@/components/navbar/MenuOverlay.astro';
 </header>
 
 <MenuOverlay />
-
-<script>
-  import { initMenuOverlay } from '@/scripts/menu-overlay';
-  import { initThemeToggle } from '@/scripts/theme-toggle';
-
-  initMenuOverlay();
-  initThemeToggle();
-</script>

@@ -1,5 +1,7 @@
 ---
-import { navItems, siteMeta } from '@/data/portfolio';
+import MenuHeader from '@/components/navbar/menu/MenuHeader.astro';
+import MenuNavList from '@/components/navbar/menu/MenuNavList.astro';
+import MenuFooter from '@/components/navbar/menu/MenuFooter.astro';
 ---
 
 <!-- Centered Menu Overlay matching Figma node #4:113 (426x373, 1px subtle border, 4px radius) -->
@@ -24,48 +26,18 @@ import { navItems, siteMeta } from '@/data/portfolio';
     class="relative z-10 w-[min(426px,calc(100vw-2.5rem))] min-h-[373px] bg-canvas border border-ink-subtle rounded-[4px] p-6 flex flex-col justify-between opacity-0 will-change-[transform,opacity]"
   >
     <!-- Overlay Top Bar -->
-    <div class="flex items-center justify-between pb-4 border-b border-ink-subtle/30">
-      <span id="menu-overlay-title" class="text-[16px] text-ink font-normal">
-        Menu
-      </span>
-      <button
-        type="button"
-        id="menu-close-btn"
-        class="theme-btn-surface inline-flex items-center justify-center gap-1.5 px-3 py-0.5 rounded-[4px] border border-ink-subtle text-ink-muted text-sm hover:text-ink focus:outline-none focus-visible:ring-1 focus-visible:ring-ink-subtle"
-      >
-        <span>Close</span>
-        <span class="text-ink-subtle text-xs">Esc</span>
-      </button>
-    </div>
+    <MenuHeader />
 
     <!-- Navigation List -->
-    <nav id="menu-nav" class="relative flex flex-col gap-1 py-4" aria-label="Menu Navigation">
-      <div
-        id="menu-active-indicator"
-        aria-hidden="true"
-        class="menu-active-indicator pointer-events-none absolute top-0 left-0 w-full rounded-[4px] opacity-0"
-      ></div>
-      {
-        navItems.map((item) => (
-          <a
-            href={item.href}
-            data-menu-item
-            class="menu-nav-link relative z-10 flex items-center justify-between px-2 py-2 rounded-[4px] text-[18px] text-ink-muted font-normal focus:outline-none"
-          >
-            <span>{item.label}</span>
-            <span class="font-mono text-xs text-ink-subtle">{item.index}</span>
-          </a>
-        ))
-      }
-    </nav>
+    <MenuNavList />
 
     <!-- Overlay Footer Row -->
-    <div
-      data-menu-item
-      class="flex items-center justify-between pt-4 border-t border-ink-subtle/30 text-xs text-ink-subtle"
-    >
-      <span>{siteMeta.menuBrand}</span>
-      <span class="font-mono">↑↓ Navigate · ↵ Select · ESC</span>
-    </div>
+    <MenuFooter />
   </div>
 </div>
+
+<script>
+  import { initMenuOverlay } from '@/scripts/menu-overlay';
+
+  initMenuOverlay();
+</script>

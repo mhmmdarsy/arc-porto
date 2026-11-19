@@ -1,59 +1,20 @@
 ---
 // Social Section matching Figma Desktop - 1
-import { contactEmail, socials } from '@/data/portfolio';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import EmailCopyRow from '@/components/sections/social/EmailCopyRow.astro';
+import SocialLinkItem from '@/components/sections/social/SocialLinkItem.astro';
+import { contactEmail, socials } from '@/data/social';
 ---
 
 <section id="social" class="flex flex-col gap-5 sm:gap-6 py-4 sm:py-6" aria-labelledby="social-heading">
   <!-- Section Title (Geist 24px) -->
-  <h2 id="social-heading" class="text-[20px] sm:text-[24px] font-normal text-ink">
-    Social
-  </h2>
+  <SectionHeading id="social-heading">Social</SectionHeading>
 
   <div class="flex flex-col gap-5 sm:gap-6 text-[15px] sm:text-[16px]">
     <!-- Email with Copy Button -->
-    <div class="flex flex-col gap-1.5">
-      <span class="text-ink-muted">Email</span>
-      <div class="flex flex-wrap items-center gap-3">
-        <a
-          href={`mailto:${contactEmail}`}
-          class="text-ink underline underline-offset-4 hover:bg-selection-bg hover:text-selection-fg transition-colors break-all"
-        >
-          {contactEmail}
-        </a>
-        <button
-          type="button"
-          id="copy-email-btn"
-          data-email={contactEmail}
-          class="theme-btn-surface inline-flex items-center justify-center px-2.5 py-1 rounded border border-ink-subtle text-ink-muted text-sm hover:text-ink hover:border-ink shrink-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-ink-subtle"
-        >
-          <span id="copy-text">Copy</span>
-        </button>
-      </div>
-    </div>
+    <EmailCopyRow email={contactEmail} />
 
     <!-- Other Social Accounts -->
-    {
-      socials.map((social) => (
-        <div class="flex flex-col gap-1.5">
-          <span class="text-ink-muted">{social.platform}</span>
-          <div>
-            <a
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-ink underline underline-offset-4 hover:bg-selection-bg hover:text-selection-fg transition-colors inline-block"
-            >
-              {social.handle}
-            </a>
-          </div>
-        </div>
-      ))
-    }
+    {socials.map((social) => <SocialLinkItem social={social} />)}
   </div>
 </section>
-
-<script>
-  import { initCopyEmail } from '@/scripts/copy-email';
-
-  initCopyEmail();
-</script>

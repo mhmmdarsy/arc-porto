@@ -1,0 +1,17 @@
+---
+import type { ProjectItem } from '@/data/projects';
+
+interface Props {
+  project: ProjectItem;
+}
+
+const { project } = Astro.props;
+---
+
+<a
+  href={project.link}
+  class="group flex items-center justify-between gap-4 text-[15px] sm:text-[16px] text-ink-muted font-normal hover:text-ink transition-colors"
+>
+  <span class="group-hover:underline underline-offset-4">{project.name}</span>
+  <span>{project.year}</span>
+</a>

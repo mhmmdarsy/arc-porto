@@ -1,26 +1,16 @@
 ---
 // Projects Section matching Figma Desktop - 1
-import { projects } from '@/data/portfolio';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import ProjectItem from '@/components/sections/projects/ProjectItem.astro';
+import { projects } from '@/data/projects';
 ---
 
 <section id="projects" class="flex flex-col gap-5 sm:gap-6 py-4 sm:py-6" aria-labelledby="projects-heading">
   <!-- Section Title (Geist 24px) -->
-  <h2 id="projects-heading" class="text-[20px] sm:text-[24px] font-normal text-ink">
-    Projects
-  </h2>
+  <SectionHeading id="projects-heading">Projects</SectionHeading>
 
   <!-- Projects List -->
   <div class="flex flex-col gap-4 sm:gap-6">
-    {
-      projects.map((project) => (
-        <a
-          href={project.link}
-          class="group flex items-center justify-between gap-4 text-[15px] sm:text-[16px] text-ink-muted font-normal hover:text-ink transition-colors"
-        >
-          <span class="group-hover:underline underline-offset-4">{project.name}</span>
-          <span>{project.year}</span>
-        </a>
-      ))
-    }
+    {projects.map((project) => <ProjectItem project={project} />)}
   </div>
 </section>

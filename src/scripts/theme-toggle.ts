@@ -1,8 +1,12 @@
 import gsap from 'gsap';
-import { siteMeta } from '@/data/portfolio';
 import { easeDrawer, easeOut, prefersReducedMotion } from '@/utils/motion';
-
-type Theme = 'dark' | 'light';
+import { createClonedShell, getCircleMetrics } from '@/scripts/theme/circle-reveal';
+import { syncThemeLabelPair } from '@/scripts/theme/label-animation';
+import {
+  getActiveDocumentTheme,
+  persistTheme,
+  type Theme,
+} from '@/scripts/theme/storage';
 
 /** Initialize the theme toggle button, persistence, label transition, and circular reveal stage. */
 export function initThemeToggle(): void {
@@ -15,7 +19,7 @@ export function initThemeToggle(): void {
   const darkLabel = themeBtn.querySelector<HTMLElement>('[data-theme-label="dark"]');
   const lightLabel = themeBtn.querySelector<HTMLElement>('[data-theme-label="light"]');
 
-  let activeTheme: Theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  let activeTheme: Theme = getActiveDocumentTheme();
   let stageTheme: Theme | null = null;
   let isStageVisible = false;
   let activeStageTween: gsap.core.Tween | null = null;
@@ -28,57 +32,11 @@ export function initThemeToggle(): void {
   let cloneLightLabel: HTMLElement | null = null;
   let scrollListenerAttached = false;
 
-  const persistTheme = (theme: Theme) => {
-    try {
-      localStorage.setItem('theme', theme);
-    } catch {
-      // Ignore storage errors in restricted contexts.
-    }
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      metaThemeColor.setAttribute(
-        'content',
-        theme === 'light' ? siteMeta.themeColors.light : siteMeta.themeColors.dark,
-      );
-    }
-  };
-
-  const syncLabelPair = (
-    darkEl: HTMLElement | null,
-    lightEl: HTMLElement | null,
-    theme: Theme,
-    animate: boolean,
-  ) => {
-    if (!darkEl || !lightEl) return;
-
-    const reduced = prefersReducedMotion();
-    const darkProps = {
-      y: 0,
-      yPercent: reduced ? 0 : theme === 'dark' ? 0 : -100,
-      opacity: theme === 'dark' ? 1 : 0,
-    };
-    const lightProps = {
-      y: 0,
-      yPercent: reduced ? 0 : theme === 'light' ? 0 : 100,
-      opacity: theme === 'light' ? 1 : 0,
-    };
-
-    if (!animate) {
-      gsap.set(darkEl, darkProps);
-      gsap.set(lightEl, lightProps);
-      return;
-    }
-
-    const duration = reduced ? 0.25 : 0.45;
-    gsap.to(darkEl, { ...darkProps, duration, ease: easeDrawer, overwrite: 'auto' });
-    gsap.to(lightEl, { ...lightProps, duration, ease: easeDrawer, overwrite: 'auto' });
-  };
-
   const updateButtonState = (theme: Theme, animate: boolean) => {
     themeBtn.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
-    syncLabelPair(darkLabel, lightLabel, theme, animate);
+    syncThemeLabelPair(darkLabel, lightLabel, theme, animate);
     if (cloneDarkLabel && cloneLightLabel) {
-      syncLabelPair(cloneDarkLabel, cloneLightLabel, theme, animate);
+      syncThemeLabelPair(cloneDarkLabel, cloneLightLabel, theme, animate);
     }
   };
 
@@ -97,17 +55,6 @@ export function initThemeToggle(): void {
     if (!scrollListenerAttached) return;
     window.removeEventListener('scroll', syncCloneScroll);
     scrollListenerAttached = false;
-  };
-
-  const getCircleMetrics = () => {
-    const rect = themeBtn.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const r = Math.hypot(
-      Math.max(cx, window.innerWidth - cx),
-      Math.max(cy, window.innerHeight - cy),
-    );
-    return { cx, cy, r };
   };
 
   const finalizeStage = (commitTheme: Theme) => {
@@ -145,35 +92,28 @@ export function initThemeToggle(): void {
     }
 
     const reduced = prefersReducedMotion();
-    const metrics = getCircleMetrics();
+    const metrics = getCircleMetrics(themeBtn);
     originX = metrics.cx;
     originY = metrics.cy;
     maxRadius = metrics.r;
 
     if (!isStageVisible) {
-      const clone = pageShell.cloneNode(true) as HTMLElement;
-      clone.removeAttribute('id');
-      clone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
-      clone.setAttribute('inert', '');
-      clone.style.willChange = 'transform';
-
-      clonedShell = clone;
-      cloneDarkLabel = clone.querySelector<HTMLElement>('[data-theme-label="dark"]');
-      cloneLightLabel = clone.querySelector<HTMLElement>('[data-theme-label="light"]');
-      cloneDarkLabel?.removeAttribute('style');
-      cloneLightLabel?.removeAttribute('style');
+      const cloned = createClonedShell(pageShell);
+      clonedShell = cloned.clone;
+      cloneDarkLabel = cloned.cloneDarkLabel;
+      cloneLightLabel = cloned.cloneLightLabel;
 
       stageTheme = activeTheme;
       isStageVisible = true;
       transitionStage.dataset.theme = activeTheme;
-      transitionStage.replaceChildren(clone);
+      transitionStage.replaceChildren(cloned.clone);
       syncCloneScroll();
       attachScrollSync();
 
       if (reduced) {
-        syncLabelPair(cloneDarkLabel, cloneLightLabel, activeTheme, false);
+        syncThemeLabelPair(cloneDarkLabel, cloneLightLabel, activeTheme, false);
         themeBtn.setAttribute('aria-pressed', activeTheme === 'light' ? 'true' : 'false');
-        syncLabelPair(darkLabel, lightLabel, activeTheme, true);
+        syncThemeLabelPair(darkLabel, lightLabel, activeTheme, true);
 
         transitionStage.style.clipPath = '';
         transitionStage.style.opacity = '0';
@@ -190,7 +130,7 @@ export function initThemeToggle(): void {
       }
 
       // Start clone labels at prevTheme so they animate in lockstep inside the expanding circle.
-      syncLabelPair(cloneDarkLabel, cloneLightLabel, prevTheme, false);
+      syncThemeLabelPair(cloneDarkLabel, cloneLightLabel, prevTheme, false);
       updateButtonState(activeTheme, true);
 
       clipState.r = 0;
