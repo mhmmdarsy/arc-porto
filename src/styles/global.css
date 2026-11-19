@@ -115,10 +115,20 @@ html[data-theme='light'] #theme-btn [data-theme-label='dark'] {
   }
 }
 
+.menu-active-indicator {
+  background-color: var(--color-surface-active);
+  border: 1px solid var(--color-ink-subtle);
+  transition: transform 180ms var(--ease-out);
+  will-change: transform, opacity;
+}
+
+.menu-active-indicator[data-immediate='true'] {
+  transition: none;
+}
+
 .menu-nav-link {
   transition:
     transform 120ms var(--ease-out),
-    background-color 150ms var(--ease-out),
     color 150ms var(--ease-out);
 }
 
@@ -127,18 +137,14 @@ html[data-theme='light'] #theme-btn [data-theme-label='dark'] {
 }
 
 .menu-nav-link[data-active='true'] {
-  background-color: var(--color-surface-active);
   color: var(--color-ink);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .menu-nav-link:hover {
-    background-color: var(--color-surface-hover);
-    color: var(--color-ink);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
+  .menu-active-indicator {
+    transition: none;
+  }
+
   .menu-nav-link:active,
   .theme-btn-surface:active {
     transform: none;

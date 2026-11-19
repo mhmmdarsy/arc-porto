@@ -13,13 +13,37 @@ export function initMenuOverlay(): void {
 
   const menuItems = Array.from(panel.querySelectorAll<HTMLElement>('[data-menu-item]'));
   const navLinks = Array.from(panel.querySelectorAll<HTMLAnchorElement>('.menu-nav-link'));
+  const activeIndicator = document.getElementById('menu-active-indicator') as HTMLDivElement | null;
 
   let isOpen = false;
   let activeIndex = 0;
   let lastFocusedEl: HTMLElement | null = null;
+  let lastPointerX = -1;
+  let lastPointerY = -1;
 
-  const setActiveIndex = (index: number, focusLink = true) => {
+  const syncIndicator = (immediate = false) => {
+    const target = navLinks[activeIndex];
+    if (!activeIndicator || !target) return;
+    const y = target.offsetTop;
+    const h = target.offsetHeight;
+    activeIndicator.style.height = `${h}px`;
+
+    if (immediate || prefersReducedMotion()) {
+      activeIndicator.setAttribute('data-immediate', 'true');
+      activeIndicator.style.transform = `translate3d(0, ${y}px, 0)`;
+      void activeIndicator.offsetHeight;
+      activeIndicator.removeAttribute('data-immediate');
+    } else {
+      activeIndicator.style.transform = `translate3d(0, ${y}px, 0)`;
+    }
+  };
+
+  const setActiveIndex = (
+    index: number,
+    options: { focusLink?: boolean; immediate?: boolean } = {},
+  ) => {
     if (!navLinks.length) return;
+    const { focusLink = true, immediate = false } = options;
     activeIndex = (index + navLinks.length) % navLinks.length;
     navLinks.forEach((link, idx) => {
       const active = idx === activeIndex;
@@ -30,6 +54,7 @@ export function initMenuOverlay(): void {
         link.removeAttribute('aria-current');
       }
     });
+    syncIndicator(immediate);
     if (focusLink) {
       navLinks[activeIndex]?.focus({ preventScroll: true });
     }
@@ -66,7 +91,9 @@ export function initMenuOverlay(): void {
     overlay.classList.add('pointer-events-auto');
 
     const wasAnimating = gsap.isTweening(panel);
-    gsap.killTweensOf([panel, backdrop, menuBtn, ...menuItems]);
+    gsap.killTweensOf(
+      [panel, backdrop, menuBtn, activeIndicator, ...menuItems].filter(Boolean) as gsap.TweenTarget[],
+    );
 
     if (prefersReducedMotion()) {
       gsap.set(panel, {
@@ -79,8 +106,9 @@ export function initMenuOverlay(): void {
       gsap.to(panel, { opacity: 1, duration: 0.18, ease: easeOut });
       gsap.to(backdrop, { opacity: 1, duration: 0.18, ease: easeOut });
       gsap.set(menuItems, { opacity: 1, y: 0 });
+      if (activeIndicator) gsap.set(activeIndicator, { opacity: 1 });
       gsap.to(menuBtn, { opacity: 0, duration: 0.18, ease: easeOut });
-      setActiveIndex(0, true);
+      setActiveIndex(0, { focusLink: true, immediate: true });
       return;
     }
 
@@ -139,7 +167,21 @@ export function initMenuOverlay(): void {
       },
     );
 
-    setActiveIndex(0, true);
+    setActiveIndex(0, { focusLink: true, immediate: true });
+
+    if (activeIndicator) {
+      gsap.fromTo(
+        activeIndicator,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.35,
+          delay: wasAnimating ? 0.05 : 0.22,
+          ease: easeOut,
+          overwrite: 'auto',
+        },
+      );
+    }
   };
 
   const closeMenu = (restoreFocus = true) => {
@@ -151,7 +193,9 @@ export function initMenuOverlay(): void {
     overlay.classList.remove('pointer-events-auto');
     overlay.classList.add('pointer-events-none');
 
-    gsap.killTweensOf([panel, backdrop, menuBtn, ...menuItems]);
+    gsap.killTweensOf(
+      [panel, backdrop, menuBtn, activeIndicator, ...menuItems].filter(Boolean) as gsap.TweenTarget[],
+    );
 
     if (prefersReducedMotion()) {
       gsap.to(panel, {
@@ -163,6 +207,7 @@ export function initMenuOverlay(): void {
         },
       });
       gsap.to(backdrop, { opacity: 0, duration: 0.18, ease: easeOut });
+      if (activeIndicator) gsap.set(activeIndicator, { opacity: 0 });
       gsap.to(menuBtn, { opacity: 1, duration: 0.18, ease: easeOut });
       if (restoreFocus && lastFocusedEl) {
         lastFocusedEl.focus({ preventScroll: true });
@@ -178,6 +223,15 @@ export function initMenuOverlay(): void {
       ease: easeOut,
       overwrite: 'auto',
     });
+
+    if (activeIndicator) {
+      gsap.to(activeIndicator, {
+        opacity: 0,
+        duration: 0.25,
+        ease: easeOut,
+        overwrite: 'auto',
+      });
+    }
 
     gsap.to(panel, {
       x: dx,
@@ -223,9 +277,28 @@ export function initMenuOverlay(): void {
   backdrop.addEventListener('click', () => closeMenu());
 
   navLinks.forEach((link, idx) => {
-    link.addEventListener('pointerenter', () => {
-      if (isOpen && canHoverFine()) {
-        setActiveIndex(idx, false);
+    link.addEventListener('pointerenter', (e) => {
+      if (!isOpen || !canHoverFine()) return;
+      lastPointerX = e.clientX;
+      lastPointerY = e.clientY;
+      if (activeIndex !== idx) {
+        setActiveIndex(idx, { focusLink: true });
+      }
+    });
+
+    link.addEventListener('pointermove', (e) => {
+      if (!isOpen || !canHoverFine()) return;
+      if (e.clientX === lastPointerX && e.clientY === lastPointerY) return;
+      lastPointerX = e.clientX;
+      lastPointerY = e.clientY;
+      if (activeIndex !== idx) {
+        setActiveIndex(idx, { focusLink: true });
+      }
+    });
+
+    link.addEventListener('focus', () => {
+      if (isOpen && activeIndex !== idx) {
+        setActiveIndex(idx, { focusLink: false });
       }
     });
 
@@ -253,6 +326,10 @@ export function initMenuOverlay(): void {
     });
   });
 
+  window.addEventListener('resize', () => {
+    if (isOpen) syncIndicator(true);
+  });
+
   window.addEventListener('keydown', (e) => {
     if (isOpen) {
       if (e.key === 'Escape') {
@@ -274,8 +351,7 @@ export function initMenuOverlay(): void {
       }
 
       if (e.key === 'Enter') {
-        const activeEl = document.activeElement;
-        if (!(activeEl instanceof HTMLButtonElement) && !(activeEl instanceof HTMLAnchorElement)) {
+        if (document.activeElement !== closeBtn) {
           e.preventDefault();
           navLinks[activeIndex]?.click();
           return;
