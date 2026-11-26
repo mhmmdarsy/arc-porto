@@ -1,0 +1,51 @@
+---
+import { siteMeta } from '@/data/site';
+---
+
+<div
+  id="welcome-loader"
+  class="welcome-loader fixed inset-0 z-[70] hidden flex-col justify-between px-5 sm:px-8 pt-[max(1.25rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] select-none pointer-events-auto"
+  role="status"
+  aria-label="Loading portfolio"
+  aria-live="off"
+>
+  <div class="w-full max-w-[896px] sm:max-w-[960px] mx-auto flex items-center justify-between font-mono text-xs tracking-wider uppercase text-[var(--loader-ink-subtle)]">
+    <span>{siteMeta.menuBrand}</span>
+    <span>{siteMeta.location}</span>
+  </div>
+
+  <div class="w-full max-w-[896px] sm:max-w-[960px] mx-auto flex flex-col gap-5 sm:gap-6">
+    <div class="flex items-end justify-between gap-4">
+      <span
+        id="welcome-loader-status"
+        class="font-mono text-xs tracking-wider uppercase text-[var(--loader-ink-muted)]"
+      >
+        Initializing
+      </span>
+      <span
+        id="welcome-loader-percent"
+        class="welcome-loader-digits font-mono text-[clamp(3.25rem,11vw,6.75rem)] font-normal leading-none tracking-normal text-[var(--loader-ink)] inline-flex items-baseline justify-end"
+        aria-hidden="true"
+      >
+        <span data-digit="hundreds" class="welcome-loader-digit"></span>
+        <span data-digit="tens" class="welcome-loader-digit"></span>
+        <span data-digit="ones" class="welcome-loader-digit">1</span>
+        <span class="welcome-loader-unit">%</span>
+      </span>
+    </div>
+
+    <div class="w-full h-px bg-[var(--loader-line)] overflow-hidden">
+      <div
+        id="welcome-loader-bar"
+        class="w-full h-full bg-[var(--loader-ink)] origin-left"
+        style="transform: scaleX(0.01);"
+      ></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initWelcomeLoader } from '@/scripts/welcome-loader';
+
+  initWelcomeLoader();
+</script>

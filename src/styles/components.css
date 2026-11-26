@@ -61,3 +61,58 @@ html[data-theme='light'] #theme-btn [data-theme-label='dark'] {
     transform: none;
   }
 }
+
+/* Welcome Loader: dynamically inverted palette against active document theme */
+:root #welcome-loader,
+html[data-theme='dark'] #welcome-loader {
+  --loader-bg: #f8fafb;
+  --loader-ink: #060e13;
+  --loader-ink-muted: #4b5563;
+  --loader-ink-subtle: #78828a;
+  --loader-line: rgba(6, 14, 19, 0.18);
+  background-color: var(--loader-bg);
+  color: var(--loader-ink);
+}
+
+html[data-theme='light'] #welcome-loader {
+  --loader-bg: #060e13;
+  --loader-ink: #ffffff;
+  --loader-ink-muted: #c1c1c1;
+  --loader-ink-subtle: #848484;
+  --loader-line: rgba(132, 132, 132, 0.35);
+  background-color: var(--loader-bg);
+  color: var(--loader-ink);
+}
+
+html[data-loader='active'] body {
+  overflow: hidden;
+}
+
+html[data-loader='active'] #welcome-loader {
+  display: flex;
+}
+
+html[data-loader='active'] #page-shell {
+  opacity: 0;
+}
+
+.welcome-loader-digits {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+.welcome-loader-digit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1ch;
+  flex-shrink: 0;
+}
+
+.welcome-loader-unit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1ch;
+  flex-shrink: 0;
+}
