@@ -8,19 +8,18 @@ interface ProgressSegment {
 }
 
 /**
- * Stuttered 1% -> 100% progression segments.
- * Deliberate pauses and micro-steps create a tactile, non-linear loading feel.
+ * Smoothly paced 1% -> 100% progression segments with gentle decelerations
+ * so the counter feels organic and unhurried without abrupt jumps.
  */
 const PROGRESS_SEGMENTS: ProgressSegment[] = [
-  { to: 18, duration: 0.22, ease: 'power2.out' },
-  { to: 21, duration: 0.18, ease: 'none' },
-  { to: 47, duration: 0.24, ease: 'power3.out' },
-  { to: 49, duration: 0.22, ease: 'steps(2)' },
-  { to: 78, duration: 0.26, ease: 'power2.inOut' },
-  { to: 81, duration: 0.2, ease: 'steps(3)' },
-  { to: 94, duration: 0.18, ease: 'power2.out' },
-  { to: 96, duration: 0.18, ease: 'none' },
-  { to: 100, duration: 0.14, ease: 'power3.out' },
+  { to: 22, duration: 0.42, ease: 'power2.out' },
+  { to: 25, duration: 0.32, ease: 'sine.inOut' },
+  { to: 54, duration: 0.48, ease: 'power2.inOut' },
+  { to: 57, duration: 0.34, ease: 'sine.inOut' },
+  { to: 82, duration: 0.46, ease: 'power2.inOut' },
+  { to: 85, duration: 0.3, ease: 'sine.inOut' },
+  { to: 96, duration: 0.34, ease: 'power2.out' },
+  { to: 100, duration: 0.28, ease: 'power2.out' },
 ];
 
 /** Initialize the inverted welcome loader and its GSAP slide-left reveal into #page-shell. */
@@ -81,14 +80,14 @@ export function initWelcomeLoader(): void {
     onComplete: cleanup,
   });
 
-  // 1. Initial appearance: fade only.
+  // 1. Initial appearance: smooth fade only.
   tl.to(loader, {
     opacity: 1,
-    duration: 0.35,
+    duration: 0.45,
     ease: easeOut,
   });
 
-  // 2. Stuttered 1% -> 100% counter.
+  // 2. Smoothly paced 1% -> 100% counter.
   for (const segment of PROGRESS_SEGMENTS) {
     tl.to(state, {
       progress: segment.to,
@@ -99,12 +98,12 @@ export function initWelcomeLoader(): void {
   }
 
   // Brief beat at 100% before transitioning out.
-  tl.to({}, { duration: 0.16 });
+  tl.to({}, { duration: 0.22 });
 
   // 3. Exit loader to the left while main content slides in from the right.
   tl.to(loader, {
     xPercent: -100,
-    duration: 0.85,
+    duration: 1.0,
     ease: easeDrawer,
   });
 
@@ -113,9 +112,9 @@ export function initWelcomeLoader(): void {
     {
       x: 0,
       opacity: 1,
-      duration: 0.9,
+      duration: 1.05,
       ease: easeDrawer,
     },
-    '<+0.03',
+    '<+0.04',
   );
 }
